@@ -1,6 +1,5 @@
 # Questioner
 ____
 
- **Questioner** is a tool that allows you **crowd-source** for questions that should be answered during a **Meetup**.
-
+ **Questioner** is a tool that allows you **crowd-source** for contributions on an upcomming **Meetup** with questions to be treated.
 
