@@ -60,6 +60,7 @@ body {
 
 .nav-item a,
 .nav a,
+.q-btn,
 .meetup-box a{
   text-decoration: none;
   color: white;
@@ -69,9 +70,11 @@ body {
 .nav-item a:hover,
 .nav-item .current,
 .nav a:hover,
-.nav .current{
+.nav .current,
+.q-btn:hover{
   color: var(--light);
   font-weight: bolder;
+  cursor: pointer;
 }
 
 .showcase{
@@ -249,16 +252,18 @@ input:focus + label {
 
 
 /* Meetups page */
-.meetup-box{
+.meetup-box,
+.question-box{
   max-width: 100%;
   display: grid;
-  grid-gap: 10px;
+  grid-gap: 15px;
   grid-template-columns: 1fr;
   margin: 0.5rem auto;
   padding: 1.1rem;
   border-bottom: thin solid;
   box-sizing: border-box;
 }
+
 
 .meetup-box .images{
   width: 100%;
@@ -284,7 +289,27 @@ input:focus + label {
   list-style: none;
 }
 
+/* Questions Page */
 
+.question-box .column-1,
+.question-box .column-0,
+.question-box .feature{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.question-box .feature{
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.header-effect{
+  margin: 0;
+  padding: 0;
+}
+
+.question-box .meetup-topic{
+  margin-top: 10px;
+}
 
 
 
