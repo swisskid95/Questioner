@@ -24,6 +24,7 @@ body {
   grid-gap: 20px;
   width: 100%;
   margin: auto;
+  box-sizing: border-box;
 }
 
 
@@ -40,21 +41,35 @@ body {
   justify-self: center;
 }
 
-.nav-item{
+.nav-item,
+.nav{
   width: 90%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
   justify-items: center;
   list-style: none;
   margin: auto;
 }
 
-.nav-item a{
+.nav-item{
+  grid-template-columns: 1fr 1fr;
+}
+
+.nav{
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.nav-item a,
+.nav a,
+.meetup-box a{
   text-decoration: none;
   color: white;
 }
+
+.meetup-box a:hover,
 .nav-item a:hover,
-.nav-item .current{
+.nav-item .current,
+.nav a:hover,
+.nav .current{
   color: var(--light);
   font-weight: bolder;
 }
@@ -87,6 +102,10 @@ body {
  min-width: 50%;
 }
 
+.field-btn a{
+  text-decoration: none;
+}
+
 .form-btn:hover{
   opacity: 0.9;
   cursor: pointer;
@@ -110,7 +129,8 @@ body {
   margin: 1.3rem auto;
 }
 
-.form-wrapper{
+.form-wrapper,
+.main-wrapper{
   width: 60%;
   margin: 1.5rem auto;
   min-height: calc(70.7vh);
@@ -227,6 +247,47 @@ input:focus + label {
   color: var(--light);
 }
 
+
+/* Meetups page */
+.meetup-box{
+  max-width: 100%;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr;
+  margin: 0.5rem auto;
+  padding: 1.1rem;
+  border-bottom: thin solid;
+  box-sizing: border-box;
+}
+
+.meetup-box .images{
+  width: 100%;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+  margin: auto;
+}
+
+.meetup-box .tags{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.meetup-box .tags ul{
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+}
+
+.meetup-box .tags ul li{
+  list-style: none;
+}
+
+
+
+
+
 /* Media Queries */
 @media (max-width: 500px){
   .main-nav{
@@ -238,4 +299,3 @@ input:focus + label {
     min-height: calc(64.1vh);
   }
 }
-
