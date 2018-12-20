@@ -258,7 +258,7 @@ input:focus + label {
   display: grid;
   grid-gap: 15px;
   grid-template-columns: 1fr;
-  margin: 0.5rem auto;
+  margin: 1.5rem auto;
   padding: 1.1rem;
   border-bottom: thin solid;
   box-sizing: border-box;
@@ -296,6 +296,7 @@ input:focus + label {
 .question-box .feature{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-gap: 15px;
 }
 
 .question-box .feature{
@@ -311,6 +312,10 @@ input:focus + label {
   margin-top: 10px;
 }
 
+/* Profile Page */
+.user{
+  color: var(--light);
+}
 
 
 /* Media Queries */
@@ -322,5 +327,17 @@ input:focus + label {
   .form-wrapper{
     width: 90%;
     min-height: calc(64.1vh);
+  }
+
+  .meetup,
+  .question-box{
+    font-size: 0.8em;
+  }
+
+  .question-box .column-1,
+  .question-box .column-0,
+  .question-box .feature{
+    grid-template-columns: 1fr;
+    width: 100%;
   }
 }
