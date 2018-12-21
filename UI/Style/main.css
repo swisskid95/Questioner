@@ -50,6 +50,16 @@ body {
   margin: auto;
 }
 
+.home-btn{
+  text-decoration: none;
+  color: var(--light);
+}
+
+.home-btn:hover{
+  color: white;
+  cursor: pointer;
+}
+
 .nav-item{
   grid-template-columns: 1fr 1fr;
 }
@@ -180,13 +190,13 @@ form{
 }
 
 /* Add transition to the labeland input */
-label, input {
+.field label, .field input {
   transition: all 0.3s;
   touch-action: manipulation;
 }
 
 
-input {
+.field input{
   font-size: 1.5em;
   border: 0;
   border-bottom: 1px dotted;
@@ -198,23 +208,88 @@ input {
   background: var(--primary);
 }
 
-input:focus{
+
+.field input:focus {
   outline: 0;
   border-bottom: 1px solid #666;
 }
 
-label {
+.field label{
   text-transform: uppercase;
   color: rgba(104, 104, 104, 0.9);
   letter-spacing: 0.05em;
   padding: 0 0 0 10px;
 }
 
+/* Add meetup @ Admin-meetup page */
+
+.add-meetup-form{
+  width: 90%;
+  background: white;
+  padding: 0.1rem;
+  display: none;
+}
+
+
+
+.add-meetup-form form{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+}
+
+.add-meetup-form form input:not([type="file"]){
+  border: none;
+  border-bottom: thin solid;
+  font-size: 1.4rem;
+  -webkit-appearance: none;
+} 
+
+.add-meetup-form form input:focus{
+  outline: 0;
+}
+
+.add-meetup-btn,
+.add-meetup-form form .submit{
+  width: 30%;
+  margin: auto;
+  background: var(--light);
+  padding: 0.3rem;
+  box-shadow: var(--shadow);
+  border: none;
+  color: white;
+  font-weight: bold;
+}
+
+.add-meetup-btn:hover,
+.add-meetup-form form .submit:hover{
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.add-meetup-form form input[type="file"]{
+  margin-left: 10px;
+}
+
+.delete-meetup-btn{
+  background: white;
+  border: none;
+  color: red;
+  outline: 0;
+  font-weight: bold;
+  padding: 0.3rem;
+}
+
+.delete-meetup-btn:hover{
+  background: red;
+  color: white;
+}
+
 /* 
 * Translate down and scale the label to cover placeholder 
 * Field-to make sure it scales properly and doesnt wrap 
 */
-input:placeholder-shown + label{
+.field input:placeholder-shown + label{
   cursor: text;
   max-width: 66.66%;
   white-space: nowrap;
@@ -225,13 +300,13 @@ input:placeholder-shown + label{
 }
 
 /* Ensure placeholder is transparent and inherit transition */
-::-webkit-input-placeholder {
+.field ::-webkit-input-placeholder {
   opacity: 0;
   transition: inherit;
 }
 
 /* Show placeholder when input is focused */
-input:focus::-webkit-input-placeholder{
+.field input:focus::-webkit-input-placeholder{
   opacity: 1;
 }
 
@@ -240,13 +315,13 @@ input:focus::-webkit-input-placeholder{
 * When element is focused
 *Also When there is an input
 */
-input:not(:placeholder-shown) + label,
-input:focus + label {
+.field input:not(:placeholder-shown) + label,
+.field input:focus + label {
   transform: translate(0, 0) scale(1);
   cursor: pointer;
 }
 
-input:focus + label {
+.field input:focus + label {
   color: var(--light);
 }
 
@@ -265,28 +340,29 @@ input:focus + label {
 }
 
 
-.meetup-box .images{
+.meetup-box .images,
+.meetup-info{
   width: 100%;
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
-  margin: auto;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 }
 
 .meetup-box .tags{
-  display: grid;
-  grid-template-columns: 1fr 3fr;
+  display: flex;
+  flex: 1 1 1px; 
 }
 
 .meetup-box .tags ul{
   display: grid;
   grid-gap: 5px;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   margin: 0;
 }
 
 .meetup-box .tags ul li{
   list-style: none;
+  margin: 0.2rem auto;
 }
 
 /* Questions Page */
@@ -317,6 +393,10 @@ input:focus + label {
   color: var(--light);
 }
 
+.meetup ol li{
+  list-style: none;
+}
+
 
 /* Media Queries */
 @media (max-width: 500px){
@@ -339,5 +419,16 @@ input:focus + label {
   .question-box .feature{
     grid-template-columns: 1fr;
     width: 100%;
+  }
+
+  .add-meetup-form form{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+  }
+
+  .add-meetup-form form input{
+    max-width: 50%;    
   }
 }
