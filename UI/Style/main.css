@@ -1,7 +1,8 @@
 /* Variables */
 :root{
-  --light: #6087FF;
-  --primary: #dddddd;
+  --light: #ffffff;
+  --primary: #6087ff;
+  --dark: #fafafa;
   --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
 }
 
@@ -9,7 +10,7 @@
 html{
  box-shadow: border-box;
  font-family: Arial, Helvetica, sans-serif;
- background: var(--primary);
+ background: var(--light);
  overflow-x: hidden
 }
 
@@ -18,25 +19,49 @@ body {
   padding: 0;
 }
 
-.container{
+/**
+* Display-Grid
+* Width-100%
+*/
+
+.container, 
+.main-nav,
+.showcase,
+.footer{
+  width: 100%
+}
+
+.container, 
+.main-nav,
+.wrapper .infograph,
+.nav-item,
+.nav,
+.add-meetup-form form{
   display: grid;
+}
+
+/* List-Style-None */
+.nav-item,
+.nav,
+.meetup-box .tags ul li,
+.meetup ol li{
+  list-style: none;
+}
+
+.container{
   grid-template-columns: 1fr;
   grid-gap: 20px;
-  width: 100%;
   margin: auto;
-  box-sizing: border-box;
 }
 
 
 .main-nav{
-  width: 100%;
-  display: grid;
   grid-gap: 1.6rem;
   grid-template-columns: 1fr 1fr;
 }
 
 .logo{
-  color: var(--light);
+  color: var(--primary);
   text-align: center;
   justify-self: center;
 }
@@ -44,20 +69,12 @@ body {
 .nav-item,
 .nav{
   width: 90%;
-  display: grid;
   justify-items: center;
-  list-style: none;
   margin: auto;
 }
 
 .home-btn{
-  text-decoration: none;
-  color: var(--light);
-}
-
-.home-btn:hover{
-  color: white;
-  cursor: pointer;
+  color: var(--primary);
 }
 
 .nav-item{
@@ -72,19 +89,36 @@ body {
 .nav a,
 .q-btn,
 .meetup-box a{
-  text-decoration: none;
-  color: white;
+  color: var(--primary);
+  opacity: 0.7;
 }
 
+/* Cursor-Pointer */
+.meetup-box a:hover,
+.nav-item a:hover,
+.nav-item .current,
+.nav a:hover,
+.nav .current,
+.q-btn:hover,
+.form-btn:hover,
+.add-meetup-btn:hover,
+.add-meetup-form form .submit:hover,
+.field input:not(:placeholder-shown) + label,
+.field input:focus + label,
+.home-btn:hover{
+  cursor: pointer;
+}
+
+/* Hover Effect */
 .meetup-box a:hover,
 .nav-item a:hover,
 .nav-item .current,
 .nav a:hover,
 .nav .current,
 .q-btn:hover{
-  color: var(--light);
+  color: var(--primary);
   font-weight: bolder;
-  cursor: pointer;
+  opacity: 1;
 }
 
 .showcase{
@@ -92,20 +126,13 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
-  width: 100%;
   min-height: 300px;
   position: relative;
 }
 
-.btn {
-  text-decoration: none;
-  color: var(--light);
-}
-
 .form-btn{
- text-decoration: none;
- color: white;
- background: var(--light);
+ color: var(--light);
+ background: var(--primary);
  font-size: 1.3em;
  padding: 0.5rem;
  display: block;
@@ -115,19 +142,26 @@ body {
  min-width: 50%;
 }
 
-.field-btn a{
+/* Text-Decoration */
+.field-btn,
+.home-btn,
+.nav-item a,
+.nav a,
+.q-btn,
+.meetup-box a,
+.btn,
+.form-btn{
   text-decoration: none;
 }
 
 .form-btn:hover{
   opacity: 0.9;
-  cursor: pointer;
 }
 
 /* InfoGraph */
 
 .showcase .info {
-  color: white;
+  color: var(--light);
   text-shadow: var(--shadow);
 }
 .showcase .info{
@@ -146,17 +180,27 @@ body {
 .main-wrapper{
   width: 60%;
   margin: 1.5rem auto;
-  min-height: calc(70.7vh);
+  background: var(--dark);
+}
+
+.meetup-form{
+  width: 60%;
+  margin: 1.5rem auto;
+}
+
+.form-wrapper{
+  padding-top: 2rem;
+  min-height: calc(67.6vh);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .wrapper .infograph{
-  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 1.3rem;
 }
 
 .wrapper .infograph .info-box{
-  background: var(--primary);
+  background: var(--dark);
   padding: 1.4rem;
   text-align: justify;
   box-shadow: var(--shadow);
@@ -164,9 +208,8 @@ body {
 
 /* Footer */
 .footer{
-  background: var(--light);
-  width: 100%;
-  color: white;
+  background: var(--primary);
+  color: var(--light);
   text-align: center;
   padding-top: 1.3rem;
   font-size: 1rem;
@@ -187,6 +230,8 @@ form{
   display: flex;
   flex-flow: column-reverse;
   margin-bottom: 1em;
+  max-width: 80%;
+  margin: auto;
 }
 
 /* Add transition to the labeland input */
@@ -205,7 +250,7 @@ form{
   border-radius: 0;
   padding: 0 0 0 10px;
   cursor: text;
-  background: var(--primary);
+  background: var(--dark);
 }
 
 
@@ -224,16 +269,14 @@ form{
 /* Add meetup @ Admin-meetup page */
 
 .add-meetup-form{
-  width: 90%;
-  background: white;
+  width: 80%;
+  background: var(--light);
   padding: 0.1rem;
   display: none;
+  margin: auto;
 }
 
-
-
 .add-meetup-form form{
-  display: grid;
   grid-template-columns: 1fr;
   grid-gap: 10px;
 }
@@ -253,7 +296,7 @@ form{
 .add-meetup-form form .submit{
   width: 30%;
   margin: auto;
-  background: var(--light);
+  background: var(--primary);
   padding: 0.3rem;
   box-shadow: var(--shadow);
   border: none;
@@ -264,7 +307,6 @@ form{
 .add-meetup-btn:hover,
 .add-meetup-form form .submit:hover{
   opacity: 0.9;
-  cursor: pointer;
 }
 
 .add-meetup-form form input[type="file"]{
@@ -282,7 +324,7 @@ form{
 
 .delete-meetup-btn:hover{
   background: red;
-  color: white;
+  color: var(--light);
 }
 
 /* 
@@ -294,7 +336,6 @@ form{
   max-width: 66.66%;
   white-space: nowrap;
   overflow: hidden;
-  /* text-overflow: ellipsis; */
   transform-origin: left bottom;
   transform: translate(0, 2.125rem) scale(1.5);
 }
@@ -318,11 +359,10 @@ form{
 .field input:not(:placeholder-shown) + label,
 .field input:focus + label {
   transform: translate(0, 0) scale(1);
-  cursor: pointer;
 }
 
 .field input:focus + label {
-  color: var(--light);
+  color: var(--primary);
 }
 
 
@@ -361,7 +401,6 @@ form{
 }
 
 .meetup-box .tags ul li{
-  list-style: none;
   margin: 0.2rem auto;
 }
 
@@ -390,11 +429,23 @@ form{
 
 /* Profile Page */
 .user{
-  color: var(--light);
+  color: var(--primary);
 }
 
-.meetup ol li{
-  list-style: none;
+.logout-btn{
+  color: red;
+  float: right;
+  margin-right: 20px;
+  background: var(--light);
+  text-decoration: none;
+  padding: 0.3rem;
+}
+
+.logout-btn:hover{
+  background: red;
+  color: white;
+  box-shadow: var(--shadow);
+  transition: all 0.5s ease-in;
 }
 
 
@@ -402,11 +453,12 @@ form{
 @media (max-width: 500px){
   .main-nav{
     grid-template-columns: 1fr;
+    margin: auto;
   }
 
   .form-wrapper{
-    width: 90%;
-    min-height: calc(64.1vh);
+    width: 100%;
+    min-height: calc(68.5vh);
   }
 
   .meetup,
@@ -419,6 +471,7 @@ form{
   .question-box .feature{
     grid-template-columns: 1fr;
     width: 100%;
+    margin: auto;
   }
 
   .add-meetup-form form{
@@ -429,6 +482,14 @@ form{
   }
 
   .add-meetup-form form input{
-    max-width: 50%;    
+    max-width: 80%;    
+  }
+
+  .add-meetup-form form .submit{
+    margin-left: 15%;
+  }
+
+  .add-meetup-btn{
+    width: 50%
   }
 }
