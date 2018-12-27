@@ -127,7 +127,7 @@ body {
   background-repeat: no-repeat;
   background-position: bottom;
   min-height: 300px;
-  position: relative;
+  text-align: center;
 }
 
 .form-btn{
@@ -168,7 +168,6 @@ body {
   max-width: 80%;
   margin: auto;
   padding-top: 3.9rem;
-  padding-left: 5rem;
 }
 
 .wrapper {
@@ -178,7 +177,7 @@ body {
 
 .form-wrapper,
 .main-wrapper{
-  width: 60%;
+  width: 50%;
   margin: 1.5rem auto;
   background: var(--dark);
 }
@@ -202,8 +201,13 @@ body {
 .wrapper .infograph .info-box{
   background: var(--dark);
   padding: 1.4rem;
-  text-align: justify;
+  text-align: center;
   box-shadow: var(--shadow);
+}
+
+.reset{
+  text-align: center;
+  margin: 1.3rem;
 }
 
 /* Footer */
@@ -229,9 +233,9 @@ form{
 .field {
   display: flex;
   flex-flow: column-reverse;
-  margin-bottom: 1em;
+  margin-bottom: 1.5rem;
   max-width: 80%;
-  margin: auto;
+  margin: 1.2rem auto;
 }
 
 /* Add transition to the labeland input */
@@ -242,7 +246,7 @@ form{
 
 
 .field input{
-  font-size: 1.5em;
+  font-size: 1rem;
   border: 0;
   border-bottom: 1px dotted;
   font-family: inherit;
@@ -338,6 +342,7 @@ form{
   overflow: hidden;
   transform-origin: left bottom;
   transform: translate(0, 2.125rem) scale(1.5);
+  margin-bottom: 1.3rem;
 }
 
 /* Ensure placeholder is transparent and inherit transition */
