@@ -1,0 +1,31 @@
+{
+  "name": "questioner",
+  "version": "1.0.0",
+  "description": "Crowdsource questions for a Meetups\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[r\u001b[Cr\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[Cr Meetups",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/**.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swisskid95/Questioner.git"
+  },
+  "keywords": [
+    "Meetup",
+    "Crowdsource",
+    "Andela",
+    "Questioner"
+  ],
+  "author": "Sanusi Babatunde",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swisskid95/Questioner/issues"
+  },
+  "homepage": "https://github.com/swisskid95/Questioner#readme",
+  "devDependencies": {
+    "eslint": "^5.11.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0"
+  }
+}
