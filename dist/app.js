@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
 var _express = _interopRequireDefault(require("express"));
 
 var _bodyParser = _interopRequireDefault(require("body-parser"));
@@ -18,11 +23,13 @@ var port = process.env.PORT || 3000; // Using bodyParser to accept JSON and url 
 app.use(_bodyParser.default.json());
 app.use(_bodyParser.default.urlencoded({
   extended: true
-})); // Setting the routes
+})); // Set up all routes
 
 app.use('/api/v1', _index.default);
 app.use('/api/v1/meetups', _meetup.default);
 app.listen(port, function () {
+  // eslint-disable-next-line no-console
   console.log("Starting server on port ".concat(port, "..."));
 });
-module.exports = app;
+var _default = app;
+exports.default = _default;
