@@ -27,6 +27,8 @@ const meetups = [
 
 const getMeetups = () => meetups;
 
+const getMeetupId = id => meetups.find(m => m.id === id);
+
 const addMeetup = (meetup) => {
   const meetupToDb = {};
   const nextId = meetups.length + 1;
@@ -44,4 +46,4 @@ const addMeetup = (meetup) => {
   return [meetupToDb];
 };
 
-export { getMeetups, addMeetup };
+export { getMeetups, addMeetup, getMeetupId };
