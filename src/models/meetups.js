@@ -18,7 +18,7 @@ const meetups = [
   {
     id: 3,
     createdOn: new Date('December 5, 2018'),
-    location: '131, oshodi/apapa road Ikeja, Lagos.',
+    location: '131, oshodi/apapa road Oshodi/Isolo, Lagos.',
     images: ['http://img1.com', 'http://img2.com', 'http://img3.com'],
     topic: 'meetup 3',
     happeningOn: new Date('January 14, 2019'),
@@ -27,4 +27,21 @@ const meetups = [
 
 const getMeetups = () => meetups;
 
-export default getMeetups;
+const addMeetup = (meetup) => {
+  const meetupToDb = {};
+  const nextId = meetups.length + 1;
+
+  meetupToDb.id = nextId;
+  meetupToDb.createdOn = new Date(meetup.createdOn.trim());
+  meetupToDb.location = meetup.location.trim();
+  meetupToDb.images = [...meetup.images];
+  meetupToDb.topic = meetup.topic.trim();
+  meetupToDb.happeningOn = new Date(meetup.happeningOn.trim());
+
+  // Push data to meetup
+  meetups.push(meetupToDb);
+
+  return [meetupToDb];
+};
+
+export { getMeetups, addMeetup };
