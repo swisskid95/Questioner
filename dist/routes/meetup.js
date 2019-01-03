@@ -21,12 +21,29 @@ router.get('/', function (req, res) {
     status: 200,
     data: (0, _meetups.getMeetups)()
   });
+}); // Get api/v1/meetups/:id
+
+router.get('/:id', function (req, res) {
+  var meetupId = parseInt(req.params.id, 10);
+  var matchedMeetup = (0, _meetups.getMeetupId)(meetupId);
+
+  if (matchedMeetup) {
+    res.status(200).json({
+      status: 200,
+      data: matchedMeetup
+    });
+  } else {
+    res.status(400).json({
+      status: 400,
+      error: "meetup with id: ".concat(meetupId, " does not exist in record")
+    });
+  }
 }); // Post api/v1/meetups
 
 router.post('/', function (req, res) {
   var body = _lodash.default.pick(req.body, 'createdOn', 'location', 'images', 'topic', 'happeningOn');
 
-  if (!body.createdOn.trim() || !body.location.trim() || !body.topic.trim() || !body.images.trim() || !body.happeningOn.trim()) {
+  if (!body.createdOn.trim() || !body.location.trim() || !body.topic.trim() || !body.images || !body.happeningOn.trim()) {
     return res.status(400).json({
       status: 400,
       error: "Invalid request!"

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.addMeetup = exports.getMeetups = void 0;
+exports.getMeetupId = exports.addMeetup = exports.getMeetups = void 0;
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
@@ -41,6 +41,14 @@ var getMeetups = function getMeetups() {
 };
 
 exports.getMeetups = getMeetups;
+
+var getMeetupId = function getMeetupId(id) {
+  return meetups.find(function (m) {
+    return m.id === id;
+  });
+};
+
+exports.getMeetupId = getMeetupId;
 
 var addMeetup = function addMeetup(meetup) {
   var meetupToDb = {};
