@@ -1,3 +1,5 @@
+import RSVPs from './RSVP';
+
 const meetups = [
   {
     id: 1,
@@ -40,10 +42,43 @@ const addMeetup = (meetup) => {
   meetupToDb.topic = meetup.topic.trim();
   meetupToDb.happeningOn = new Date(meetup.happeningOn.trim());
 
-  // Push data to meetup
+  // Push data to meetups
   meetups.push(meetupToDb);
 
   return [meetupToDb];
 };
 
-export { getMeetups, addMeetup, getMeetupId };
+// const getUpcomingMeetup = () => {
+
+// }
+
+const addMeetupToRsvp = (id, body) => {
+  const meetupToRsvp = {};
+
+  // Check if id exist in meetup
+  const meetupId = getMeetupId(id);
+
+  // returning Null if id doesn't exist in meetup
+  if (!meetupId) {
+    return;
+  }
+
+  // Generate new id for RSVP
+  const nextId = RSVPs.length + 1;
+
+  // extract useful property
+  meetupToRsvp.id = nextId;
+  meetupToRsvp.meetup = meetupId.id;
+  meetupToRsvp.user = body.userId;
+  meetupToRsvp.status = body.status;
+
+  // push data to RSVPs
+  RSVPs.push(meetupToRsvp);
+
+  // eslint-disable-next-line consistent-return
+  return [meetupToRsvp];
+};
+
+export {
+  getMeetups, addMeetup, getMeetupId, addMeetupToRsvp,
+};

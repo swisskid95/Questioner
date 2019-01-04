@@ -3,7 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getMeetupId = exports.addMeetup = exports.getMeetups = void 0;
+exports.addMeetupToRsvp = exports.getMeetupId = exports.addMeetup = exports.getMeetups = void 0;
+
+var _RSVP = _interopRequireDefault(require("./RSVP"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
@@ -58,10 +62,37 @@ var addMeetup = function addMeetup(meetup) {
   meetupToDb.location = meetup.location.trim();
   meetupToDb.images = _toConsumableArray(meetup.images);
   meetupToDb.topic = meetup.topic.trim();
-  meetupToDb.happeningOn = new Date(meetup.happeningOn.trim()); // Push data to meetup
+  meetupToDb.happeningOn = new Date(meetup.happeningOn.trim()); // Push data to meetups
 
   meetups.push(meetupToDb);
   return [meetupToDb];
-};
+}; // const getUpcomingMeetup = () => {
+// }
+
 
 exports.addMeetup = addMeetup;
+
+var addMeetupToRsvp = function addMeetupToRsvp(id, body) {
+  var meetupToRsvp = {}; // Check if id exist in meetup
+
+  var meetupId = getMeetupId(id); // returning Null if id doesn't exist in meetup
+
+  if (!meetupId) {
+    return;
+  } // Generate new id for RSVP
+
+
+  var nextId = _RSVP.default.length + 1; // extract useful property
+
+  meetupToRsvp.id = nextId;
+  meetupToRsvp.meetup = meetupId.id;
+  meetupToRsvp.user = body.userId;
+  meetupToRsvp.status = body.status; // push data to RSVPs
+
+  _RSVP.default.push(meetupToRsvp); // eslint-disable-next-line consistent-return
+
+
+  return [meetupToRsvp];
+};
+
+exports.addMeetupToRsvp = addMeetupToRsvp;

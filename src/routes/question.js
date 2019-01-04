@@ -16,10 +16,11 @@ router.post('/', (req, res) => {
       status: 400,
       error: 'all indicated field should be filled',
     });
-  }else if (!_.isString(body.title) || !_.isString(body.body) || !_.isNumber(body.createdBy) || !_.isNumber(body.meetup) || !_.isString(body.createdOn)) {
+  } if (!_.isString(body.title) || !_.isString(body.body) || !_.isNumber(body.createdBy)
+    || !_.isNumber(body.meetup) || !_.isString(body.createdOn)) {
     return res.status(415).json({
       status: 415,
-      error: 'value types are not correct',
+      error: 'value type not correct',
     });
   }
 
@@ -34,16 +35,15 @@ router.patch('/:id/upvote', (req, res) => {
   const questionId = parseInt(req.params.id, 10);
   const patchedQuestion = increaseVote(questionId);
 
-  if(patchedQuestion){
-    console.log(patchedQuestion);
+  if (patchedQuestion) {
     res.status(200).json({
       status: 200,
       data: patchedQuestion,
-    })
-  }else{
+    });
+  } else {
     res.status(400).json({
       status: 400,
-      error: 'no question with specified id'
+      error: 'no question with specified id',
     });
   }
 });
@@ -53,16 +53,15 @@ router.patch('/:id/downvote', (req, res) => {
   const questionId = parseInt(req.params.id, 10);
   const patchedQuestion = decreaseVote(questionId);
 
-  if(patchedQuestion){
-    console.log(patchedQuestion);
+  if (patchedQuestion) {
     res.status(200).json({
       status: 200,
       data: patchedQuestion,
-    })
-  }else{
+    });
+  } else {
     res.status(400).json({
       status: 400,
-      error: 'no question with specified id'
+      error: 'no question with specified id',
     });
   }
 });
