@@ -26,10 +26,8 @@ router.get('/:id', (req, res) => {
     res.status(400).json({
       status: 400,
       error: `meetup with id: ${meetupId} does not exist in record`
-    })
-  }
-
-  
+    });
+  } 
 })
 
 // Post api/v1/meetups

@@ -13,6 +13,8 @@ var _index = _interopRequireDefault(require("./routes/index"));
 
 var _meetup = _interopRequireDefault(require("./routes/meetup"));
 
+var _question = _interopRequireDefault(require("./routes/question"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Import Routes
@@ -27,6 +29,7 @@ app.use(_bodyParser.default.urlencoded({
 
 app.use('/api/v1', _index.default);
 app.use('/api/v1/meetups', _meetup.default);
+app.use('/api/v1/questions', _question.default);
 app.listen(port, function () {
   // eslint-disable-next-line no-console
   console.log("Starting server on port ".concat(port, "..."));
