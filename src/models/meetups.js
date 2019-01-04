@@ -48,9 +48,13 @@ const addMeetup = (meetup) => {
   return [meetupToDb];
 };
 
-// const getUpcomingMeetup = () => {
+const getUpcomingMeetup = () => {
+  const today = new Date();
 
-// }
+  const upcomingMeetups = meetups.filter(m => m.happeningOn < today);
+
+  return upcomingMeetups;
+};
 
 const addMeetupToRsvp = (id, body) => {
   const meetupToRsvp = {};
@@ -80,5 +84,5 @@ const addMeetupToRsvp = (id, body) => {
 };
 
 export {
-  getMeetups, addMeetup, getMeetupId, addMeetupToRsvp,
+  getMeetups, addMeetup, getMeetupId, addMeetupToRsvp, getUpcomingMeetup,
 };

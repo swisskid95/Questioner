@@ -1,7 +1,7 @@
 import express from 'express';
 import _ from 'lodash';
 import {
-  getMeetups, addMeetup, getMeetupId, addMeetupToRsvp,
+  getMeetups, addMeetup, getMeetupId, addMeetupToRsvp, getUpcomingMeetup,
 } from '../models/meetups';
 
 const router = express.Router();
@@ -15,9 +15,21 @@ router.get('/', (req, res) => {
 });
 
 // Get api/v1/meetups/upcoming
-// router.get('/upcoming', (req, res) => {
+router.get('/upcoming', (req, res) => {
+  const upcommingMeetup = getUpcomingMeetup();
 
-// })
+  if (!upcommingMeetup) {
+    return res.status(200).json({
+      status: 200,
+      data: ['There are no upcoming '],
+    });
+  }
+
+  return res.status(200).json({
+    status: 200,
+    data: upcommingMeetup,
+  });
+});
 
 // Get api/v1/meetups/:id
 router.get('/:id', (req, res) => {

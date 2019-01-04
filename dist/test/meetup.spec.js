@@ -33,6 +33,10 @@ describe('Meetups Endpoints test', function () {
     // HTTP get request for /api/v1/meetups
     (0, _supertest.default)(_app.default).get('/api/v1/meetups').set('accept', 'aplication/json').expect('content/type', /json/).expect(200);
   });
+  it('Test case for get meetups api call', function () {
+    // HTTP get request for /api/v1/meetups
+    (0, _supertest.default)(_app.default).get('/api/v1/meetups.upcoming').set('accept', 'aplication/json').expect('content/type', /json/).expect(200);
+  });
   it('Test case for get meetups by id api call', function () {
     // HTTP get request for /api/v1/meetups/:<meetupID>
     (0, _supertest.default)(_app.default).get('/api/v1/meetups/1').set('accept', 'aplication/json').expect('content/type', /json/).expect(200);

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.addMeetupToRsvp = exports.getMeetupId = exports.addMeetup = exports.getMeetups = void 0;
+exports.getUpcomingMeetup = exports.addMeetupToRsvp = exports.getMeetupId = exports.addMeetup = exports.getMeetups = void 0;
 
 var _RSVP = _interopRequireDefault(require("./RSVP"));
 
@@ -66,11 +66,19 @@ var addMeetup = function addMeetup(meetup) {
 
   meetups.push(meetupToDb);
   return [meetupToDb];
-}; // const getUpcomingMeetup = () => {
-// }
-
+};
 
 exports.addMeetup = addMeetup;
+
+var getUpcomingMeetup = function getUpcomingMeetup() {
+  var today = new Date();
+  var upcomingMeetups = meetups.filter(function (m) {
+    return m.happeningOn < today;
+  });
+  return upcomingMeetups;
+};
+
+exports.getUpcomingMeetup = getUpcomingMeetup;
 
 var addMeetupToRsvp = function addMeetupToRsvp(id, body) {
   var meetupToRsvp = {}; // Check if id exist in meetup
