@@ -22,9 +22,22 @@ router.get('/', function (req, res) {
     data: (0, _meetups.getMeetups)()
   });
 }); // Get api/v1/meetups/upcoming
-// router.get('/upcoming', (req, res) => {
-// })
-// Get api/v1/meetups/:id
+
+router.get('/upcoming', function (req, res) {
+  var upcommingMeetup = (0, _meetups.getUpcomingMeetup)();
+
+  if (!upcommingMeetup) {
+    return res.status(200).json({
+      status: 200,
+      data: ['There are no upcoming ']
+    });
+  }
+
+  return res.status(200).json({
+    status: 200,
+    data: upcommingMeetup
+  });
+}); // Get api/v1/meetups/:id
 
 router.get('/:id', function (req, res) {
   var meetupId = parseInt(req.params.id, 10);
