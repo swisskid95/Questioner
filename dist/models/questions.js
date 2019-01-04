@@ -64,15 +64,31 @@ var addQuestion = function addQuestion(question) {
 exports.addQuestion = addQuestion;
 
 var increaseVote = function increaseVote(id) {
-  var question = getQuestionId(id);
+  // Check if id exist
+  var question = getQuestionId(id); // Returns if id doesn't exist
+
+  if (!question) {
+    return;
+  } // increase votes by one(1)
+
+
   question.votes += 1;
+  return [question];
 };
 
 exports.increaseVote = increaseVote;
 
 var decreaseVote = function decreaseVote(id) {
-  var question = getQuestionId(id);
-  question.votes -= 1;
+  // Checks if question with id exist
+  var question = getQuestionId(id); // Return if question with id doesn't exist
+
+  if (!question) {
+    return;
+  } // reduce votes by one(1) only when greater than zero
+
+
+  if (question.votes > 0) question.votes -= 1;
+  return [question];
 };
 
 exports.decreaseVote = decreaseVote;
