@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 // Import Routes
 import indexRouter from './routes/index';
 import meetupRouter from './routes/meetup';
+import questionRouter from './routes/question';
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Set up all routes
 app.use('/api/v1', indexRouter);
 app.use('/api/v1/meetups', meetupRouter);
+app.use('/api/v1/questions', questionRouter);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
