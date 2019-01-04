@@ -26,10 +26,12 @@ router.post('/', function (req, res) {
       status: 400,
       error: 'all indicated field should be filled'
     });
-  } else if (!_lodash.default.isString(body.title) || !_lodash.default.isString(body.body) || !_lodash.default.isNumber(body.createdBy) || !_lodash.default.isNumber(body.meetup) || !_lodash.default.isString(body.createdOn)) {
+  }
+
+  if (!_lodash.default.isString(body.title) || !_lodash.default.isString(body.body) || !_lodash.default.isNumber(body.createdBy) || !_lodash.default.isNumber(body.meetup) || !_lodash.default.isString(body.createdOn)) {
     return res.status(415).json({
       status: 415,
-      error: 'value types are not correct'
+      error: 'value type not correct'
     });
   }
 
@@ -44,7 +46,6 @@ router.patch('/:id/upvote', function (req, res) {
   var patchedQuestion = (0, _questions.increaseVote)(questionId);
 
   if (patchedQuestion) {
-    console.log(patchedQuestion);
     res.status(200).json({
       status: 200,
       data: patchedQuestion
@@ -62,7 +63,6 @@ router.patch('/:id/downvote', function (req, res) {
   var patchedQuestion = (0, _questions.decreaseVote)(questionId);
 
   if (patchedQuestion) {
-    console.log(patchedQuestion);
     res.status(200).json({
       status: 200,
       data: patchedQuestion

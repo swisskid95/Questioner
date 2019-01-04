@@ -35,7 +35,7 @@ describe('Meetups Endpoints test', () => {
   });
 
   it('Test case for get meetups by id api call', () => {
-    // HTTP get request for /api/v1/meetups
+    // HTTP get request for /api/v1/meetups/:<meetupID>
     request(app)
       .get('/api/v1/meetups/1')
       .set('accept', 'aplication/json')
@@ -51,4 +51,10 @@ describe('Meetups Endpoints test', () => {
       .expect('content/type', /json/)
       .expect(201);
   });
+
+  // it('Test case for post meetup by id to RSVP', () => {
+  //   // HTTP post request for api/v1/meetups/:<meetupID>/rsvp
+  //   request(app)
+  //     .post('/api/v1/meetups/1/rsvp',)
+  // })
 });
