@@ -54,15 +54,33 @@ const addQuestion = (question) => {
 };
 
 const increaseVote = (id) => {
+  // Check if id exist
   const question = getQuestionId(id);
 
+  // Returns if id doesn't exist
+  if(!question){
+    return
+  }
+
+  // increase votes by one(1)
   question.votes += 1;
+
+  return [question]
 };
 
 const decreaseVote = (id) => {
+  // Checks if question with id exist
   const question = getQuestionId(id);
 
-  question.votes -= 1;
+  // Return if question with id doesn't exist
+  if(!question){
+    return
+  }
+
+  // reduce votes by one(1) only when greater than zero
+  if (question.votes > 0) question.votes -= 1;
+
+  return [question]
 };
 
 export {

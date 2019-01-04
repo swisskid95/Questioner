@@ -1,6 +1,6 @@
 import express from 'express';
 import _ from 'lodash';
-import { addQuestion } from '../models/questions';
+import { addQuestion, increaseVote, decreaseVote } from '../models/questions';
 
 const router = express.Router();
 
@@ -17,8 +17,8 @@ router.post('/', (req, res) => {
       error: 'all indicated field should be filled',
     });
   }else if (!_.isString(body.title) || !_.isString(body.body) || !_.isNumber(body.createdBy) || !_.isNumber(body.meetup) || !_.isString(body.createdOn)) {
-    return res.status(400).json({
-      status: 400,
+    return res.status(415).json({
+      status: 415,
       error: 'value types are not correct',
     });
   }
@@ -27,6 +27,44 @@ router.post('/', (req, res) => {
     status: 201,
     data: addQuestion(body),
   });
+});
+
+// Patch /api/v1/questions/:id/upvote
+router.patch('/:id/upvote', (req, res) => {
+  const questionId = parseInt(req.params.id, 10);
+  const patchedQuestion = increaseVote(questionId);
+
+  if(patchedQuestion){
+    console.log(patchedQuestion);
+    res.status(200).json({
+      status: 200,
+      data: patchedQuestion,
+    })
+  }else{
+    res.status(400).json({
+      status: 400,
+      error: 'no question with specified id'
+    });
+  }
+});
+
+// Patch /api/v1/questions/:id/downvote
+router.patch('/:id/downvote', (req, res) => {
+  const questionId = parseInt(req.params.id, 10);
+  const patchedQuestion = decreaseVote(questionId);
+
+  if(patchedQuestion){
+    console.log(patchedQuestion);
+    res.status(200).json({
+      status: 200,
+      data: patchedQuestion,
+    })
+  }else{
+    res.status(400).json({
+      status: 400,
+      error: 'no question with specified id'
+    });
+  }
 });
 
 export default router;
