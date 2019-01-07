@@ -58,8 +58,8 @@ const increaseVote = (id) => {
   const question = getQuestionId(id);
 
   // Returns if id doesn't exist
-  if(!question){
-    return
+  if (!question) {
+    return;
   }
 
   // increase votes by one(1)
@@ -73,14 +73,14 @@ const decreaseVote = (id) => {
   const question = getQuestionId(id);
 
   // Return if question with id doesn't exist
-  if(!question){
-    return
+  if (!question) {
+    return;
   }
 
   // reduce votes by one(1) only when greater than zero
   if (question.votes > 0) question.votes -= 1;
 
-  return [question]
+  return [question];
 };
 
 export {
