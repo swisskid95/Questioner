@@ -10,23 +10,23 @@
     crossorigin="anonymous">
   <title>Profile</title>
 </head>
-<div class="container">
-
+<body class="wrap">
   <header class="main-nav">
     <div class="logo">
-      <h2>Questioner?</h2>
+      <h2>Questioner</h2>
     </div>
-    <ul class="nav">
-      <li><a href="meetups.html">Meetups</a></li>
-      <li><a href="questions.html"> Questions</a></li>
-      <li><a href="#" class="current"><i class="fa fa-user"></i> Profile</a></li>
-    </ul>
+    <div class="dropdown">
+        <a href="profile.html" class="drop-btn"><i class="fa fa-user"></i> Profile</a>
+        <div class="dropdown-content">
+            <a href="meetups.html" class="current"> Meetups</a>
+            <a class="logout-btn" href="index.html">
+                <i class="fas fa-power-off"></i>
+                Logout
+            </a>
+        </div>
+      </div>
   </header>
   <main>
-    <a class="logout-btn" href="index.html">
-      <i class="fas fa-power-off"></i>
-      Logout
-    </a>
     <div class="main-wrapper">
       <div class="question-box">
         <h2 class="user header-effect">
@@ -139,12 +139,11 @@
         </ol>
       </div>
     </div>
-</div>
-</main>
-<footer class="footer">
-  &copy; Andela cycle 40 Bootcamp
-</footer>
-</div>
+    </div>
+  </main>
+  <footer class="footer">
+    &copy; Andela cycle 40 Bootcamp
+  </footer>
 
 </body>
 
