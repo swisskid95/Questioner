@@ -8,15 +8,28 @@
 
 /* Page Setup */
 html{
- box-shadow: border-box;
+ box-sizing: border-box;
  font-family: Arial, Helvetica, sans-serif;
  background: var(--light);
- overflow-x: hidden
+ overflow-x: hidden;
 }
 
 body {
   margin: 0;
   padding: 0;
+}
+
+body.wrap{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+body.wrap > main {
+  flex: 1 1 auto;
+  box-sizing: border-box;
 }
 
 /**
@@ -36,7 +49,7 @@ body {
 .wrapper .infograph,
 .nav-item,
 .nav,
-.add-meetup-form form{
+.add-form form{
   display: grid;
 }
 
@@ -57,19 +70,36 @@ body {
 
 .main-nav{
   grid-gap: 1.6rem;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
+  max-height: 70px;
+  background: var(--dark);
+  box-shadow: var(--shadow);
+}
+
+.main-nav .right-menu{
+  margin: auto;
+}
+
+.main-nav .right-menu .toggle{
+  width: 100%;
+  padding: 10px 30px;
+  text-align: right;
+  box-sizing: border-box;
+  color: var(--primary);
+  display: none;
 }
 
 .logo{
   color: var(--primary);
-  text-align: center;
-  justify-self: center;
+  text-align: start;
+  justify-self: start;
+  margin-left: 30px;
 }
 
 .nav-item,
 .nav{
   width: 90%;
-  justify-items: center;
+  justify-items: self-end;
   margin: auto;
 }
 
@@ -81,6 +111,10 @@ body {
   grid-template-columns: 1fr 1fr;
 }
 
+.nav-item li{
+  margin-right: 30px;
+}
+
 .nav{
   grid-template-columns: 1fr 1fr 1fr;
 }
@@ -90,6 +124,67 @@ body {
 .q-btn,
 .meetup-box a{
   color: var(--primary);
+  font-weight: bolder;
+}
+
+/* DropDown */
+.drop-btn{
+  background: var(--dark);
+  color: var(--primary);
+  text-decoration: none;
+  padding: 16px;
+  padding-bottom: 20px;
+  font-weight: bolder;
+
+}
+
+/* Set the dropdown container to position drop menu */
+.dropdown{
+  position: relative;
+  display: inline-block;
+  padding-top: 25px;
+}
+
+/* Droddown content invisible by default */
+.dropdown-content{
+  display: none;
+  position: relative;
+  top: 25px;
+  background: var(--dark);
+  width: 160px;
+  box-shadow: var(--shadow);
+  z-index: 1;
+}
+
+.dropdown-content a{
+  color: var(--primary);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-weight: bold;
+}
+
+/* hover state of individual content */
+.dropdown-content a:hover{
+  background: var(--primary);
+  color: var(--light);
+}
+
+.dropdown-content a.logout-btn{
+  color: red;
+}
+
+.dropdown-content a.logout-btn:hover{
+  background: red;
+  color: white;
+}
+
+/* show dropdown on hover */
+.dropdown:hover .dropdown-content{
+  display: block;
+}
+
+.dropdown:hover .drop-btn{
   opacity: 0.7;
 }
 
@@ -101,8 +196,8 @@ body {
 .nav .current,
 .q-btn:hover,
 .form-btn:hover,
-.add-meetup-btn:hover,
-.add-meetup-form form .submit:hover,
+.add-btn:hover,
+.add-form form .submit:hover,
 .field input:not(:placeholder-shown) + label,
 .field input:focus + label,
 .home-btn:hover{
@@ -117,17 +212,30 @@ body {
 .nav .current,
 .q-btn:hover{
   color: var(--primary);
-  font-weight: bolder;
-  opacity: 1;
+  opacity: 0.7;
 }
 
 .showcase{
+  min-height: 300px;
+  text-align: center;
+  display: block;
+  position: relative;
+ 
+}
+
+.showcase::before{
+  content: " ";
   background: url("../img/showPics.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
-  min-height: 300px;
-  text-align: center;
+  opacity: 0.7;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;  
 }
 
 .form-btn{
@@ -162,7 +270,6 @@ body {
 
 .showcase .info {
   color: var(--light);
-  text-shadow: var(--shadow);
 }
 .showcase .info{
   max-width: 80%;
@@ -178,18 +285,23 @@ body {
 .form-wrapper,
 .main-wrapper{
   width: 50%;
-  margin: 1.5rem auto;
+  margin: 2rem auto;
   background: var(--dark);
+  padding: 1.5rem;
 }
 
-.meetup-form{
+.meetup-form,
+.question-form{
   width: 60%;
   margin: 1.5rem auto;
 }
 
+.question-form textarea{
+  resize: none;
+}
+
 .form-wrapper{
   padding-top: 2rem;
-  min-height: calc(67.6vh);
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -213,14 +325,16 @@ body {
 /* Footer */
 .footer{
   background: var(--primary);
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  align-items: center;
   color: var(--light);
-  text-align: center;
-  padding-top: 1.3rem;
   font-size: 1rem;
   min-height: 30px;
-  margin-top: 25px;
   position: relative;
   bottom: 0;
+  box-sizing: border-box;
 }
 
 /* Sign Up & Sign in */
@@ -248,7 +362,7 @@ form{
 .field input{
   font-size: 1rem;
   border: 0;
-  border-bottom: 1px dotted;
+  border-bottom: 1px solid;
   font-family: inherit;
   -webkit-appearance: none;
   border-radius: 0;
@@ -272,7 +386,7 @@ form{
 
 /* Add meetup @ Admin-meetup page */
 
-.add-meetup-form{
+.add-form{
   width: 80%;
   background: var(--light);
   padding: 0.1rem;
@@ -280,24 +394,23 @@ form{
   margin: auto;
 }
 
-.add-meetup-form form{
+.add-form form{
   grid-template-columns: 1fr;
   grid-gap: 10px;
 }
 
-.add-meetup-form form input:not([type="file"]){
+.add-form form input:not([type="file"]){
   border: none;
   border-bottom: thin solid;
   font-size: 1.4rem;
   -webkit-appearance: none;
 } 
 
-.add-meetup-form form input:focus{
+.add-form form input:focus{
   outline: 0;
 }
 
-.add-meetup-btn,
-.add-meetup-form form .submit{
+.add-form form .submit{
   width: 30%;
   margin: auto;
   background: var(--primary);
@@ -308,12 +421,11 @@ form{
   font-weight: bold;
 }
 
-.add-meetup-btn:hover,
-.add-meetup-form form .submit:hover{
+.add-form form .submit:hover{
   opacity: 0.9;
 }
 
-.add-meetup-form form input[type="file"]{
+.add-form form input[type="file"]{
   margin-left: 10px;
 }
 
@@ -359,7 +471,7 @@ form{
 /* 
 * Remove label transform 
 * When element is focused
-*Also When there is an input
+* Also When there is an input
 */
 .field input:not(:placeholder-shown) + label,
 .field input:focus + label {
@@ -437,33 +549,54 @@ form{
   color: var(--primary);
 }
 
-.logout-btn{
-  color: red;
-  float: right;
-  margin-right: 20px;
-  background: var(--light);
-  text-decoration: none;
-  padding: 0.3rem;
+/* Admin-meetup Table */
+.meetups-table{
+  overflow-x: auto;
+  max-width: 100%;
 }
 
-.logout-btn:hover{
-  background: red;
-  color: white;
-  box-shadow: var(--shadow);
-  transition: all 0.5s ease-in;
+.meetup-table {
+  margin: auto;
+  width: 80%;
+  border-collapse: collapse;
+  text-align: center;
 }
+
+th{
+  background-color: var(--primary);
+  color: var(--light);
+}
+
+th, td{
+  border: 2px solid var(--light);
+  padding: 10px;
+}
+
 
 
 /* Media Queries */
 @media (max-width: 500px){
   .main-nav{
-    grid-template-columns: 1fr;
-    margin: auto;
+    display: flex;
+    text-align: center;
+    width: 100%;
+  }
+
+  .main-nav .right-menu .toggle{
+    display: block;
+  }
+
+  .main-nav .right-menu ul.nav-item{
+    width: 100%;
+    display: block;
+  }
+
+  .main-nav .right-menu ul.nav-item li{
+    display: block;
   }
 
   .form-wrapper{
-    width: 100%;
-    min-height: calc(68.5vh);
+    max-width: 70%;
   }
 
   .meetup,
@@ -479,22 +612,28 @@ form{
     margin: auto;
   }
 
-  .add-meetup-form form{
+  .add-form form{
     width: 100%;
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 20px;
   }
 
-  .add-meetup-form form input{
+  .add-form form input{
     max-width: 80%;    
   }
 
-  .add-meetup-form form .submit{
+  .add-form form .submit{
     margin-left: 15%;
   }
 
-  .add-meetup-btn{
+  .add-btn{
     width: 50%
+  }
+}
+
+@media (min-width: 1660px){
+  .showcase{
+    min-height: 700px;
   }
 }

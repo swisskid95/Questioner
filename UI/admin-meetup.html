@@ -10,26 +10,28 @@
     crossorigin="anonymous">
   <title>Admin| Meetups</title>
 </head>
-<div class="container">
+
+<body class="wrap">
 
   <header class="main-nav">
     <div class="logo">
-      <h2>Questioner?</h2>
+      <h2>Questioner</h2>
     </div>
-    <ul class="nav">
-      <li><a href="#" class="current"> Meetups</a></li>
-      <li><a href="questions.html"> Questions</a></li>
-      <li><a href="profile.html"><i class="fa fa-user"></i> Profile</a></li>
-    </ul>
+    <div class="dropdown">
+      <a href="profile.html" class="drop-btn"><i class="fa fa-user"></i> Profile</a>
+      <div class="dropdown-content">
+        <a href="meetups.html"> Meetups</a>
+        <a href="#" class="add-btn">Add Meetup</a>
+        <a class="logout-btn" href="index.html">
+          <i class="fas fa-power-off"></i>
+          Logout
+        </a>
+      </div>
+    </div>
   </header>
   <main>
-    <a class="logout-btn" href="index.html">
-      <i class="fas fa-power-off"></i>
-      Logout
-    </a>
     <div class="meetup-form">
-      <button class="add-meetup-btn">Add Meetup</button>
-      <div class="add-meetup-form">
+      <div class="add-form">
         <form action="">
           <input type="text" for="title" name="title" placeholder="Title" required>
           <input type="date" name="happening-on" for="happening-on" placeholder="Date" required>
@@ -41,111 +43,103 @@
         </form>
       </div>
     </div>
-    <div class="main-wrapper">
-      <div class="meetup-box">
-        <a href="questions.html">
-          <div class="topic">
-            <h4>
-              <i class="fab fa-meetup"></i>
-              <span>Meetup 101</span>
-            </h4>
-          </div>
-        </a>
-        <div>
-
-          <div class="images">
-            <img src="https://dummyimage.com/200/000/fff" alt="meetup images">
-            <img src="https://dummyimage.com/200/000/fff" alt="meetup images">
-          </div>
-        </div>
-        <div class="meetup-info">
-          <div class="created-on">
-            <i class="far fa-calendar-plus"></i>
-            <span>Created: 24th-Dec-2018</span>
-          </div>
-          <div class="location">
+    <div class="meetups-table">
+      <table class="meetup-table">
+        <tr>
+          <th>Meetup Name</th>
+          <th>Meetup location</th>
+          <th>Meetup Date</th>
+          <th>Date Created</th>
+        </tr>
+        <tr>
+          <td class="meetup-title">
+            <a href="questions.html" class="q-btn">
+              <div class="topic">
+                <h4>
+                  <i class="fab fa-meetup"></i>
+                  <span>Meetup 10</span>
+                </h4>
+              </div>
+            </a>
+          </td>
+          <td class="location">
             <i class="fas fa-thumbtack"></i>
             <span>Meetup's location</span>
-          </div>
-          <div class="happening-on">
+          </td>
+          <td class="meetup-date">
             <i class="fas fa-calendar-day"></i>
             <span>Happening: 26th-Jan-2019</span>
-          </div>
-        </div>
-        <button class="delete-meetup-btn">Delete Meetup</button>
-      </div>
-      <div class="meetup-box">
-        <a href="questions.html">
-          <div class="topic">
-            <h4>
-              <i class="fab fa-meetup"></i>
-              <span>Meetup 101</span>
-            </h4>
-          </div>
-        </a>
-        <div>
-
-          <div class="images">
-            <img src="https://dummyimage.com/200/000/fff" alt="meetup images">
-            <img src="https://dummyimage.com/200/000/fff" alt="meetup images">
-          </div>
-        </div>
-        <div class="meetup-info">
-          <div class="created-on">
+          </td>
+          <td class="date-created">
             <i class="far fa-calendar-plus"></i>
             <span>Created: 24th-Dec-2018</span>
-          </div>
-          <div class="location">
+          </td>
+          <td class="delete">
+            <button class="delete-meetup-btn">Delete Meetup</button>
+          </td>
+        </tr>
+        <tr>
+          <td class="meetup-title">
+            <a href="questions.html" class="q-btn">
+              <div class="topic">
+                <h4>
+                  <i class="fab fa-meetup"></i>
+                  <span>Meetup 1</span>
+                </h4>
+              </div>
+            </a>
+          </td>
+          <td class="location">
             <i class="fas fa-thumbtack"></i>
             <span>Meetup's location</span>
-          </div>
-          <div class="happening-on">
+          </td>
+          <td class="meetup-date">
             <i class="fas fa-calendar-day"></i>
             <span>Happening: 26th-Jan-2019</span>
-          </div>
-        </div>
-        <button class="delete-meetup-btn">Delete Meetup</button>
-      </div>
-      <div class="meetup-box">
-        <a href="questions.html">
-          <div class="topic">
-            <h4>
-              <i class="fab fa-meetup"></i>
-              <span>Meetup 101</span>
-            </h4>
-          </div>
-        </a>
-        <div>
-
-          <div class="images">
-            <img src="https://dummyimage.com/200/000/fff" alt="meetup images">
-            <img src="https://dummyimage.com/200/000/fff" alt="meetup images">
-          </div>
-        </div>
-        <div class="meetup-info">
-          <div class="created-on">
+          </td>
+          <td class="date-created">
             <i class="far fa-calendar-plus"></i>
             <span>Created: 24th-Dec-2018</span>
-          </div>
-          <div class="location">
+          </td>
+          <td class="delete">
+            <button class="delete-meetup-btn">Delete Meetup</button>
+          </td>
+        </tr>
+        <tr>
+          <td class="meetup-title">
+            <a href="questions.html" class="q-btn">
+              <div class="topic">
+                <h4>
+                  <i class="fab fa-meetup"></i>
+                  <span>Meetup 2</span>
+                </h4>
+              </div>
+            </a>
+          </td>
+          <td class="location">
             <i class="fas fa-thumbtack"></i>
             <span>Meetup's location</span>
-          </div>
-          <div class="happening-on">
+          </td>
+          <td class="meetup-date">
             <i class="fas fa-calendar-day"></i>
             <span>Happening: 26th-Jan-2019</span>
-          </div>
-        </div>
-        <button class="delete-meetup-btn">Delete Meetup</button>
-      </div>
+          </td>
+          <td class="date-created">
+            <i class="far fa-calendar-plus"></i>
+            <span>Created: 24th-Dec-2018</span>
+          </td>
+          <td class="delete">
+            <button class="delete-meetup-btn">Delete Meetup</button>
+          </td>
+        </tr>
+      </table>
     </div>
   </main>
   <footer class="footer">
     &copy; Andela cycle 40 Bootcamp
   </footer>
-</div>
 
-<script src="./js/add-meetup.js"></script>
+  <script src="./js/add-form.js"></script>
 </body>
 
 </html>

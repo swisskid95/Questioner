@@ -11,25 +11,38 @@
   <title>Questions</title>
 </head>
 
-<body>
+<body class="wrap">
   <div class="container">
 
     <header class="main-nav">
       <div class="logo">
-        <h2>Questioner?</h2>
+        <h2>Questioner</h2>
       </div>
-      <ul class="nav">
-        <li><a href="meetups.html">Meetups</a></li>
-        <li><a href="#" class="current"> Questions</a></li>
-        <li><a href="profile.html"><i class="fa fa-user"></i> Profile</a></li>
-      </ul>
+      <div class="dropdown">
+        <a href="profile.html" class="drop-btn"><i class="fa fa-user"></i> Profile</a>
+        <div class="dropdown-content">
+          <a href="meetups.html" class="current"> Meetups</a>
+          <a href="#" class="add-btn">Add Question</a>
+          <a class="logout-btn" href="index.html">
+            <i class="fas fa-power-off"></i>
+            Logout
+          </a>
+        </div>
+      </div>
     </header>
     <main>
-      <a class="logout-btn" href="index.html">
-        <i class="fas fa-power-off"></i>
-        Logout
-      </a>
       <div class="main-wrapper">
+        <div class="question-form">
+          <div class="add-form">
+            <form action="">
+              <input type="text" for="topic" name="topic" placeholder="Topic" required>
+              <textarea name="body" type="text" cols="30" rows="10" placeholder="Enter Question Body here"></textarea>
+              <button class="submit">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
         <div class="question-box">
           <div class="column-0">
             <a href="meetups.html" class="q-btn meetup-topic">
@@ -506,7 +519,7 @@
       &copy; Andela cycle 40 Bootcamp
     </footer>
   </div>
-
+  <script src="./js/add-form.js"></script>
 </body>
 
 </html>
