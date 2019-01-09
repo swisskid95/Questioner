@@ -1,4 +1,4 @@
-const RSVPs = [
+const rsvp = [
   {
     id: 1,
     meetup: 1,
@@ -30,17 +30,17 @@ const RSVPs = [
     response: 'yes',
   },
   {
-    id: 5,
+    id: 6,
     meetup: 3,
     user: 2,
     response: 'no',
   },
   {
-    id: 6,
+    id: 7,
     meetup: 1,
     user: 3,
     response: 'yes',
   },
 ];
 
-export default RSVPs;
+export default rsvp;

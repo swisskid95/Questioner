@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import logger from 'morgan';
 
 // Import Routes
 import indexRouter from './routes/index';
@@ -7,6 +8,8 @@ import meetupRouter from './routes/meetup';
 import questionRouter from './routes/question';
 
 const app = express();
+
+app.use(logger('dev'));
 
 // Set to env Port value for availability
 const port = process.env.PORT || 3000;
