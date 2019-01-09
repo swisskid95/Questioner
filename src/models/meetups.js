@@ -1,5 +1,3 @@
-import RSVPs from './RSVP';
-
 const meetups = [
   {
     id: 1,
@@ -27,62 +25,4 @@ const meetups = [
   },
 ];
 
-const getMeetups = () => meetups;
-
-const getMeetupId = id => meetups.find(m => m.id === id);
-
-const addMeetup = (meetup) => {
-  const meetupToDb = {};
-  const nextId = meetups.length + 1;
-
-  meetupToDb.id = nextId;
-  meetupToDb.createdOn = new Date(meetup.createdOn.trim());
-  meetupToDb.location = meetup.location.trim();
-  meetupToDb.images = [...meetup.images];
-  meetupToDb.topic = meetup.topic.trim();
-  meetupToDb.happeningOn = new Date(meetup.happeningOn.trim());
-
-  // Push data to meetups
-  meetups.push(meetupToDb);
-
-  return [meetupToDb];
-};
-
-const getUpcomingMeetup = () => {
-  const today = new Date();
-
-  const upcomingMeetups = meetups.filter(m => m.happeningOn < today);
-
-  return upcomingMeetups;
-};
-
-const addMeetupToRsvp = (id, body) => {
-  const meetupToRsvp = {};
-
-  // Check if id exist in meetup
-  const meetupId = getMeetupId(id);
-
-  // returning Null if id doesn't exist in meetup
-  if (!meetupId) {
-    return;
-  }
-
-  // Generate new id for RSVP
-  const nextId = RSVPs.length + 1;
-
-  // extract useful property
-  meetupToRsvp.id = nextId;
-  meetupToRsvp.meetup = meetupId.id;
-  meetupToRsvp.user = body.userId;
-  meetupToRsvp.status = body.status;
-
-  // push data to RSVPs
-  RSVPs.push(meetupToRsvp);
-
-  // eslint-disable-next-line consistent-return
-  return [meetupToRsvp];
-};
-
-export {
-  getMeetups, addMeetup, getMeetupId, addMeetupToRsvp, getUpcomingMeetup,
-};
+export default meetups;

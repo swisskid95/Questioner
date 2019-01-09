@@ -3,20 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getUpcomingMeetup = exports.addMeetupToRsvp = exports.getMeetupId = exports.addMeetup = exports.getMeetups = void 0;
-
-var _RSVP = _interopRequireDefault(require("./RSVP"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
+exports.default = void 0;
 var meetups = [{
   id: 1,
   createdOn: new Date('January 20, 2018'),
@@ -39,68 +26,5 @@ var meetups = [{
   topic: 'meetup 3',
   happeningOn: new Date('January 14, 2019')
 }];
-
-var getMeetups = function getMeetups() {
-  return meetups;
-};
-
-exports.getMeetups = getMeetups;
-
-var getMeetupId = function getMeetupId(id) {
-  return meetups.find(function (m) {
-    return m.id === id;
-  });
-};
-
-exports.getMeetupId = getMeetupId;
-
-var addMeetup = function addMeetup(meetup) {
-  var meetupToDb = {};
-  var nextId = meetups.length + 1;
-  meetupToDb.id = nextId;
-  meetupToDb.createdOn = new Date(meetup.createdOn.trim());
-  meetupToDb.location = meetup.location.trim();
-  meetupToDb.images = _toConsumableArray(meetup.images);
-  meetupToDb.topic = meetup.topic.trim();
-  meetupToDb.happeningOn = new Date(meetup.happeningOn.trim()); // Push data to meetups
-
-  meetups.push(meetupToDb);
-  return [meetupToDb];
-};
-
-exports.addMeetup = addMeetup;
-
-var getUpcomingMeetup = function getUpcomingMeetup() {
-  var today = new Date();
-  var upcomingMeetups = meetups.filter(function (m) {
-    return m.happeningOn < today;
-  });
-  return upcomingMeetups;
-};
-
-exports.getUpcomingMeetup = getUpcomingMeetup;
-
-var addMeetupToRsvp = function addMeetupToRsvp(id, body) {
-  var meetupToRsvp = {}; // Check if id exist in meetup
-
-  var meetupId = getMeetupId(id); // returning Null if id doesn't exist in meetup
-
-  if (!meetupId) {
-    return;
-  } // Generate new id for RSVP
-
-
-  var nextId = _RSVP.default.length + 1; // extract useful property
-
-  meetupToRsvp.id = nextId;
-  meetupToRsvp.meetup = meetupId.id;
-  meetupToRsvp.user = body.userId;
-  meetupToRsvp.status = body.status; // push data to RSVPs
-
-  _RSVP.default.push(meetupToRsvp); // eslint-disable-next-line consistent-return
-
-
-  return [meetupToRsvp];
-};
-
-exports.addMeetupToRsvp = addMeetupToRsvp;
+var _default = meetups;
+exports.default = _default;

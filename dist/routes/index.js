@@ -13,7 +13,7 @@ var router = _express.default.Router(); // Get Home Page
 
 
 router.get('/', function (req, res) {
-  res.send('Questioner says Hello');
+  res.status(300).redirect('/api/v1/meetups');
 });
 var _default = router;
 exports.default = _default;

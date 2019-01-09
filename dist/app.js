@@ -9,6 +9,8 @@ var _express = _interopRequireDefault(require("express"));
 
 var _bodyParser = _interopRequireDefault(require("body-parser"));
 
+var _morgan = _interopRequireDefault(require("morgan"));
+
 var _index = _interopRequireDefault(require("./routes/index"));
 
 var _meetup = _interopRequireDefault(require("./routes/meetup"));
@@ -18,7 +20,8 @@ var _question = _interopRequireDefault(require("./routes/question"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Import Routes
-var app = (0, _express.default)(); // Set to env Port value for availability
+var app = (0, _express.default)();
+app.use((0, _morgan.default)('dev')); // Set to env Port value for availability
 
 var port = process.env.PORT || 3000; // Using bodyParser to accept JSON and url encoded values
 

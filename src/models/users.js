@@ -7,7 +7,7 @@ const users = [
     email: 'email1@mail.com',
     phoneNumber: '08123456789',
     userName: 'username1',
-    registered: new Date('registered 1'),
+    registered: new Date('December 3, 2018'),
     isAdmin: false,
   },
   {
@@ -18,7 +18,7 @@ const users = [
     email: 'email1@mail.com',
     phoneNumber: '08123456789',
     userName: 'username2',
-    registered: new Date('registered 2'),
+    registered: new Date('December 15, 2018'),
     isAdmin: false,
   },
   {
@@ -29,7 +29,7 @@ const users = [
     email: 'email1@mail.com',
     phoneNumber: '08123456789',
     userName: 'username3',
-    registered: new Date('registered 3'),
+    registered: new Date('january 2, 2019'),
     isAdmin: false,
   },
 ];

@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var RSVPs = [{
+var rsvp = [{
   id: 1,
   meetup: 1,
   user: 1,
@@ -30,15 +30,15 @@ var RSVPs = [{
   user: 2,
   response: 'yes'
 }, {
-  id: 5,
+  id: 6,
   meetup: 3,
   user: 2,
   response: 'no'
 }, {
-  id: 6,
+  id: 7,
   meetup: 1,
   user: 3,
   response: 'yes'
 }];
-var _default = RSVPs;
+var _default = rsvp;
 exports.default = _default;
