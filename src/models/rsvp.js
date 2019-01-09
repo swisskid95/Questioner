@@ -1,4 +1,4 @@
-const rsvp = [
+const rsvps = [
   {
     id: 1,
     meetup: 1,
@@ -43,4 +43,4 @@ const rsvp = [
   },
 ];
 
-export default rsvp;
+export default rsvps;

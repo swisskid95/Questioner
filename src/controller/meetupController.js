@@ -1,5 +1,5 @@
 import meetups from '../models/meetups';
-import rsvp from '../models/rsvp';
+import rsvps from '../models/rsvp';
 
 // Helper functions
 // Returns all meetups
@@ -48,7 +48,7 @@ const addMeetupToRsvp = (id, body) => {
   }
 
   // Generate new id for RSVP
-  const nextId = rsvp.length + 1;
+  const nextId = rsvps.length + 1;
 
   // extract useful property
   meetupToRsvp.id = nextId;
@@ -57,7 +57,7 @@ const addMeetupToRsvp = (id, body) => {
   meetupToRsvp.status = body.status;
 
   // push data to RSVPs
-  rsvp.push(meetupToRsvp);
+  rsvps.push(meetupToRsvp);
 
   // eslint-disable-next-line consistent-return
   return [meetupToRsvp];
@@ -201,10 +201,10 @@ class MeetupController {
     }
 
     // fetch specified meetup id and add to RSVP
-    const rsvps = addMeetupToRsvp(meetupId, { status, userId });
+    const rsvp = addMeetupToRsvp(meetupId, { status, userId });
 
     // check if meetup with id exists
-    if (!rsvps) {
+    if (!rsvp) {
       return res.status(404).json({
         status: 404,
         error: 'meetup with the specified ID not found',
@@ -214,7 +214,7 @@ class MeetupController {
     // All conditions met
     return res.status(201).json({
       status: 201,
-      data: rsvps,
+      data: rsvp,
     });
   }
 }
