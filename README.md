@@ -55,5 +55,6 @@ ____
 _____
    Decreases question with specified id's vote by 1
 **>- PATCH api/v1/question/<questionID>/downvote**
+____
 
 #### work still in progress
