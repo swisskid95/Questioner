@@ -15,4 +15,42 @@ The main application is hosted here [Questioner](https://sanusi-questioner-serve
 
 #### The Pivotal Tracker Story link can be found here [PT stories](https://www.pivotaltracker.com/n/projects/2232638)
 
+#### The Endpoint
+
+This currently contain *8 endpoints* 
+
+__listed below are the endpoints http verbs and the details:__
+
+____
+
+**>- GET api/v1/meetups**
+____
+   Gets all meetups from record
+  
+
+**>- POST api/v1/meeptups**
+____
+   Creates a new meetup
+
+**>- GET api/v1/meetups/:<meetupsID>**
+____
+   Gets meetup with specified id from record
+
+**>- POST api/v1/meetups/<meetupID>/rsvp**
+____
+  Adds a meetup to rsvp list
+
+**>- GET api/v1/meetups/upcoming**
+   Gets all meetups that have not occured yet
+
+**>- POST api/v1/questions**
+____
+   Create a question in the question record
+
+**>- PATCH api/v1/question/<questionID>/upvote**
+   Increases question with specified id's vote by 1
+
+**>- PATCH api/v1/question/<questionID>/downvote**
+   Decreases question with specified id's vote by 1
+
 #### work still in progress
