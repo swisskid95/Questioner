@@ -23,32 +23,39 @@ __listed below are the endpoints http verbs and the details:__
 
 ____
 
+   Gets all meetups from record
+
 **>- GET api/v1/meetups**
 ____
-   Gets all meetups from record
   
+   Creates a new meetup
 
 **>- POST api/v1/meeptups**
 ____
-   Creates a new meetup
+
+   Gets meetup with specified id from record
 
 **>- GET api/v1/meetups/:<meetupsID>**
 ____
-   Gets meetup with specified id from record
+
+  Adds a meetup to rsvp list
 
 **>- POST api/v1/meetups/<meetupID>/rsvp**
 ____
-  Adds a meetup to rsvp list
 
-**>- GET api/v1/meetups/upcoming**
    Gets all meetups that have not occured yet
 
+**>- GET api/v1/meetups/upcoming**
+____
+
+   Create a question in the question record
 **>- POST api/v1/questions**
 ____
-   Create a question in the question record
 
-**>- PATCH api/v1/question/<questionID>/upvote**
    Increases question with specified id's vote by 1
+**>- PATCH api/v1/question/<questionID>/upvote**
+
+____
 
 **>- PATCH api/v1/question/<questionID>/downvote**
    Decreases question with specified id's vote by 1
