@@ -275,6 +275,7 @@ body.wrap > main {
   max-width: 80%;
   margin: auto;
   padding-top: 3.9rem;
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .wrapper {
@@ -522,7 +523,6 @@ form{
 }
 
 /* Questions Page */
-
 .question-box .column-1,
 .question-box .column-0,
 .question-box .feature{
@@ -576,23 +576,21 @@ th, td{
 
 /* Media Queries */
 @media (max-width: 500px){
-  .main-nav{
+
+  .intro-nav {
+    grid-template-columns: 1fr;
+    margin-bottom: 25px;
+  }
+
+  .intro-nav .intro-logo{ 
+    margin: auto;
+  }
+
+  .intro-nav .intro-item{
     display: flex;
-    text-align: center;
-    width: 100%;
-  }
-
-  .main-nav .right-menu .toggle{
-    display: block;
-  }
-
-  .main-nav .right-menu ul.nav-item{
-    width: 100%;
-    display: block;
-  }
-
-  .main-nav .right-menu ul.nav-item li{
-    display: block;
+    justify-content: flex-end;
+    margin-right: 10px;
+    margin-bottom: 10px;
   }
 
   .form-wrapper{
