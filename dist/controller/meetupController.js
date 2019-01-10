@@ -251,12 +251,12 @@ function () {
       } // fetch specified meetup id and add to RSVP
 
 
-      var rsvps = addMeetupToRsvp(meetupId, {
+      var rsvp = addMeetupToRsvp(meetupId, {
         status: status,
         userId: userId
       }); // check if meetup with id exists
 
-      if (!rsvps) {
+      if (!rsvp) {
         return res.status(404).json({
           status: 404,
           error: 'meetup with the specified ID not found'
@@ -266,7 +266,7 @@ function () {
 
       return res.status(201).json({
         status: 201,
-        data: rsvps
+        data: rsvp
       });
     }
   }]);
