@@ -23,8 +23,8 @@ describe('Questions Endpoints test', () => {
         expect(res.status).to.equal(201);
         expect(res.body.status).to.equal(res.status);
         expect(res.body.data).to.be.an('array');
-        done();
       });
+    done();
   });
 
   it('Test case for patch questions by id api call', (done) => {
@@ -36,8 +36,8 @@ describe('Questions Endpoints test', () => {
         expect(res.status).to.equal(200);
         expect(res.body.data).to.be.an('array');
         expect(res.body.status).to.equal(res.status);
-        done();
       });
+    done();
   });
 
   it('Test case for patch questions by id api call', (done) => {

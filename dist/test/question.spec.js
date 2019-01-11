@@ -24,8 +24,8 @@ describe('Questions Endpoints test', function () {
       expect(res.status).to.equal(201);
       expect(res.body.status).to.equal(res.status);
       expect(res.body.data).to.be.an('array');
-      done();
     });
+    done();
   });
   it('Test case for patch questions by id api call', function (done) {
     (0, _supertest.default)(_app.default).patch('/api/v1/questions/1/upvote').set('accept', 'aplication/json').then(function (res) {
@@ -33,8 +33,8 @@ describe('Questions Endpoints test', function () {
       expect(res.status).to.equal(200);
       expect(res.body.data).to.be.an('array');
       expect(res.body.status).to.equal(res.status);
-      done();
     });
+    done();
   });
   it('Test case for patch questions by id api call', function (done) {
     (0, _supertest.default)(_app.default).patch('/api/v1/questions/1/downvote').set('accept', 'aplication/json').then(function (res) {

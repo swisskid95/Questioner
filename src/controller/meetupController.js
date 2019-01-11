@@ -23,7 +23,7 @@ const addMeetup = (meetup) => {
   const nextId = meetups.length + 1;
 
   meetupToDb.id = nextId;
-  meetupToDb.createdOn = new Date();
+  meetupToDb.createdOn = new Date(meetup.createdOn.trim());
   meetupToDb.location = meetup.location.trim();
   meetupToDb.images = [...meetup.images];
   meetupToDb.topic = meetup.topic.trim();
@@ -124,29 +124,23 @@ class MeetupController {
   static createMeetup(req, res) {
     // selecting only needed properties
     const {
-      location, images, topic, happeningOn,
+      createdOn, location, images, topic, happeningOn,
     } = req.body;
 
     // Validating input
-    if (!location || !topic || !images || !happeningOn) {
+    if (!createdOn || !location || !topic || !images || !happeningOn || !createdOn.trim()
+      || !location.trim() || !topic.trim() || !happeningOn.trim()) {
       return res.status(400)
         .json({
           status: 400,
-          error: 'required properties not given!',
-        });
-    } if (typeof location !== 'string' || typeof topic !== 'string'
-    || typeof happeningOn !== 'string' || typeof images !== 'object') {
-      return res.status(400)
-        .json({
-          status: 400,
-          error: 'The Value types not supported',
+          error: 'Invalid request!',
         });
     }
 
     return res.status(201).json({
       status: 201,
       data: addMeetup({
-        location, images, topic, happeningOn,
+        createdOn, location, images, topic, happeningOn,
       }),
     });
   }
