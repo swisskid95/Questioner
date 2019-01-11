@@ -11,6 +11,8 @@ var _rsvp = _interopRequireDefault(require("../models/rsvp"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -54,7 +56,7 @@ var addMeetup = function addMeetup(meetup) {
   var meetupToDb = {};
   var nextId = _meetups.default.length + 1;
   meetupToDb.id = nextId;
-  meetupToDb.createdOn = new Date(meetup.createdOn.trim());
+  meetupToDb.createdOn = new Date();
   meetupToDb.location = meetup.location.trim();
   meetupToDb.images = _toConsumableArray(meetup.images);
   meetupToDb.topic = meetup.topic.trim();
@@ -163,23 +165,28 @@ function () {
     value: function createMeetup(req, res) {
       // selecting only needed properties
       var _req$body = req.body,
-          createdOn = _req$body.createdOn,
           location = _req$body.location,
           images = _req$body.images,
           topic = _req$body.topic,
           happeningOn = _req$body.happeningOn; // Validating input
 
-      if (!createdOn || !location || !topic || !images || !happeningOn || !createdOn.trim() || !location.trim() || !topic.trim() || !happeningOn.trim()) {
+      if (!location || !topic || !images || !happeningOn) {
         return res.status(400).json({
           status: 400,
-          error: 'Invalid request!'
+          error: 'required properties not given!'
+        });
+      }
+
+      if (typeof location !== 'string' || typeof topic !== 'string' || typeof happeningOn !== 'string' || _typeof(images) !== 'object') {
+        return res.status(400).json({
+          status: 400,
+          error: 'The Value types not supported'
         });
       }
 
       return res.status(201).json({
         status: 201,
         data: addMeetup({
-          createdOn: createdOn,
           location: location,
           images: images,
           topic: topic,

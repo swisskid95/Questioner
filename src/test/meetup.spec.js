@@ -94,12 +94,11 @@ describe('Meetups Endpoints error handling test', () => {
     done();
   });
 
-  it('Test case for api endpoint api/v1/meetups handling error', (done) => {
+  it('1st Test case for api endpoint api/v1/meetups handling error', (done) => {
     const payload = {
       location: '15, Allwhite avenue, Ikotun, Lagos.',
       images: ['http://img1.com', 'http://img2.com', 'http://img3.com'],
       topic: 'meetup 2',
-      happeningOn: 'October 1, 2018',
     };
     request(app)
       .post('/api/v1/meetups')
@@ -107,7 +106,26 @@ describe('Meetups Endpoints error handling test', () => {
       .then((res) => {
         expect(res.status).to.equal(400);
         expect(res.body.error).to.be.a('string');
-        expect(res.body.error).to.equal('Invalid request!');
+        expect(res.body.error).to.equal('required properties not given!');
+        expect(res.body.status).to.equal(res.status);
+      });
+    done();
+  });
+
+  it('2nd Test case for api endpoint api/v1/meetups handling error', (done) => {
+    const payload = {
+      location: '15, Allwhite avenue, Ikotun, Lagos.',
+      images: ['http://img1.com', 'http://img2.com', 'http://img3.com'],
+      topic: 'meetup 2',
+      happeningOn: 487,
+    };
+    request(app)
+      .post('/api/v1/meetups')
+      .send(payload)
+      .then((res) => {
+        expect(res.status).to.equal(400);
+        expect(res.body.error).to.be.a('string');
+        expect(res.body.error).to.equal('The Value types not supported');
         expect(res.body.status).to.equal(res.status);
       });
     done();
@@ -119,7 +137,7 @@ describe('Meetups Endpoints error handling test', () => {
       status: 'yes',
     };
     request(app)
-      .post('/api/v1/meetups/7/rsvps')
+      .post('/api/v1/meetups/99/rsvps')
       .send(payload)
       .then((res) => {
         expect(res.body.error).to.equal('meetup with the specified ID not found');
@@ -151,7 +169,7 @@ describe('Meetups Endpoints error handling test', () => {
       userId: 2,
     };
     request(app)
-      .post('/api/v1/meetups/7/rsvps')
+      .post('/api/v1/meetups/1/rsvps')
       .send(payload)
       .then((res) => {
         expect(res.body.error).to.equal('Required property not given');
