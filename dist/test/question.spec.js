@@ -61,8 +61,7 @@ describe('Error handling on questions Endpoints', function () {
     var payload = {
       createdBy: 2,
       meetup: 2,
-      title: 'titlesd',
-      body: 4
+      title: 'titlesd'
     };
     (0, _supertest.default)(_app.default).post('/api/v1/questions').send(payload).set('accept', 'aplication/json').then(function (res) {
       expect('content/type', /json/);
@@ -75,7 +74,6 @@ describe('Error handling on questions Endpoints', function () {
   });
   it('Test case for invalid value type', function (done) {
     var payload = {
-      createdOn: 'january 5, 2019',
       createdBy: 2,
       meetup: 2,
       title: 'titlesd',

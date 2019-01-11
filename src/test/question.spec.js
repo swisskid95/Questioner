@@ -74,7 +74,6 @@ describe('Error handling on questions Endpoints', () => {
       createdBy: 2,
       meetup: 2,
       title: 'titlesd',
-      body: 4,
     };
     request(app)
       .post('/api/v1/questions')
@@ -92,7 +91,6 @@ describe('Error handling on questions Endpoints', () => {
 
   it('Test case for invalid value type', (done) => {
     const payload = {
-      createdOn: 'january 5, 2019',
       createdBy: 2,
       meetup: 2,
       title: 'titlesd',
