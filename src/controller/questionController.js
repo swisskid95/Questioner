@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import questions from '../models/questions';
 
 // Helper functions for question
@@ -11,7 +10,7 @@ const addQuestion = (question) => {
   const nextId = questions.length + 1;
 
   questionToDb.id = nextId;
-  questionToDb.createdOn = new Date(question.createdOn.trim());
+  questionToDb.createdOn = new Date();
   questionToDb.createdBy = question.createdBy;
   questionToDb.meetup = question.meetup;
   questionToDb.title = question.title.trim();
@@ -30,7 +29,7 @@ const increaseVote = (id) => {
 
   // Returns if id doesn't exist
   if (!question) {
-    return;
+    return null;
   }
 
   // increase votes by one(1)
@@ -45,7 +44,7 @@ const decreaseVote = (id) => {
 
   // Return if question with id doesn't exist
   if (!question) {
-    return;
+    return null;
   }
 
   // reduce votes by one(1) only when greater than zero
@@ -68,18 +67,18 @@ class QuestionController {
    */
   static createQuestion(req, res) {
     const {
-      createdBy, createdOn, meetup, title, body,
+      createdBy, meetup, title, body,
     } = req.body;
 
     // Validation if all properties are given
-    if (!createdOn || !title || !body || !createdOn.trim() || !meetup
+    if (!title || !body || !meetup
       || !createdBy || !title.trim()) {
       return res.status(400).json({
         status: 400,
         error: 'Missing required property',
       });
     } if (typeof title !== 'string' || typeof body !== 'string' || typeof createdBy !== 'number'
-      || typeof meetup !== 'number' || typeof createdOn !== 'string') {
+      || typeof meetup !== 'number') {
       return res.status(400).json({
         status: 400,
         error: 'value type not correct',
@@ -89,7 +88,7 @@ class QuestionController {
     return res.status(201).json({
       status: 201,
       data: addQuestion({
-        createdBy, createdOn, meetup, title, body,
+        createdBy, meetup, title, body,
       }),
     });
   }
@@ -128,8 +127,8 @@ class QuestionController {
    *
    * @static decreaseVote
    *
-   * @param {*} req
-   * @param {*} res
+   * @param {object} req
+   * @param {object} res
    *
    * @memberof QuestionController
    */
