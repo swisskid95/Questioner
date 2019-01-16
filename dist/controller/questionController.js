@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _questions = _interopRequireDefault(require("../models/questions"));
+var _db = _interopRequireDefault(require("../db"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14,57 +14,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-// Helper functions for question
-// Return Qestion by indicated Id
-var getQuestionId = function getQuestionId(id) {
-  return _questions.default.find(function (m) {
-    return m.id === id;
-  });
-}; // Adds a new question to the questions array
-
-
-var addQuestion = function addQuestion(question) {
-  var questionToDb = {};
-  var nextId = _questions.default.length + 1;
-  questionToDb.id = nextId;
-  questionToDb.createdOn = new Date();
-  questionToDb.createdBy = question.createdBy;
-  questionToDb.meetup = question.meetup;
-  questionToDb.title = question.title.trim();
-  questionToDb.body = question.body.trim();
-  questionToDb.votes = 0; // Push data to meetup
-
-  _questions.default.push(questionToDb);
-
-  return [questionToDb];
-};
-
-var _increaseVote = function increaseVote(id) {
-  // Check if id exist
-  var question = getQuestionId(id); // Returns if id doesn't exist
-
-  if (!question) {
-    return null;
-  } // increase votes by one(1)
-
-
-  question.votes += 1;
-  return [question];
-};
-
-var _decreaseVote = function decreaseVote(id) {
-  // Checks if question with id exist
-  var question = getQuestionId(id); // Return if question with id doesn't exist
-
-  if (!question) {
-    return null;
-  } // reduce votes by one(1) only when greater than zero
-
-
-  if (question.votes > 0) question.votes -= 1;
-  return [question];
-};
 
 var QuestionController =
 /*#__PURE__*/
@@ -132,10 +81,19 @@ function () {
 
   }, {
     key: "increaseVote",
-    value: function increaseVote(req, res) {
-      var questionId = parseInt(req.params.id, 10);
+    value: function (_increaseVote) {
+      function increaseVote(_x, _x2) {
+        return _increaseVote.apply(this, arguments);
+      }
 
-      var patchedQuestion = _increaseVote(questionId);
+      increaseVote.toString = function () {
+        return _increaseVote.toString();
+      };
+
+      return increaseVote;
+    }(function (req, res) {
+      var questionId = parseInt(req.params.id, 10);
+      var patchedQuestion = increaseVote(questionId);
 
       if (patchedQuestion) {
         res.status(200).json({
@@ -148,7 +106,7 @@ function () {
           error: 'no question with specified id'
         });
       }
-    }
+    })
     /**
      * Consumes endpoint api/v1/questions/<questionId/downvotes
      * Decreases votes on a specified question Id
@@ -163,10 +121,19 @@ function () {
 
   }, {
     key: "decreaseVote",
-    value: function decreaseVote(req, res) {
-      var questionId = parseInt(req.params.id, 10);
+    value: function (_decreaseVote) {
+      function decreaseVote(_x3, _x4) {
+        return _decreaseVote.apply(this, arguments);
+      }
 
-      var patchedQuestion = _decreaseVote(questionId);
+      decreaseVote.toString = function () {
+        return _decreaseVote.toString();
+      };
+
+      return decreaseVote;
+    }(function (req, res) {
+      var questionId = parseInt(req.params.id, 10);
+      var patchedQuestion = decreaseVote(questionId);
 
       if (patchedQuestion) {
         res.status(200).json({
@@ -179,7 +146,7 @@ function () {
           error: 'no question with specified id'
         });
       }
-    }
+    })
   }]);
 
   return QuestionController;

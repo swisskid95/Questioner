@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _meetups = _interopRequireDefault(require("../models/meetups"));
+var _moment = _interopRequireDefault(require("moment"));
 
-var _rsvp = _interopRequireDefault(require("../models/rsvp"));
+var _db = _interopRequireDefault(require("../db"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18,78 +18,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-// Helper functions
-// Returns all meetups
-var _getMeetups = function getMeetups() {
-  return _meetups.default;
-}; // returns a specific meetup with id specified
-
-
-var getMeetupId = function getMeetupId(id) {
-  return _meetups.default.find(function (m) {
-    return m.id === id;
-  });
-}; // Filters out the meetups below current date
-
-
-var getUpcomingMeetup = function getUpcomingMeetup() {
-  var today = Date.parse(new Date());
-
-  var upcomingMeetups = _meetups.default.filter(function (m) {
-    return Date.parse(m.happeningOn) > today;
-  });
-
-  return upcomingMeetups;
-}; // create new meetup
-
-
-var addMeetup = function addMeetup(meetup) {
-  var meetupToDb = {};
-  var nextId = _meetups.default.length + 1;
-  meetupToDb.id = nextId;
-  meetupToDb.createdOn = new Date();
-  meetupToDb.location = meetup.location.trim();
-  meetupToDb.images = _toConsumableArray(meetup.images);
-  meetupToDb.topic = meetup.topic.trim();
-  meetupToDb.happeningOn = new Date(meetup.happeningOn.trim()); // Push data to meetups
-
-  _meetups.default.push(meetupToDb);
-
-  return [meetupToDb];
-}; // push meetup with id to rsvp
-
-
-var addMeetupToRsvp = function addMeetupToRsvp(id, body) {
-  var meetupToRsvp = {}; // Check if id exist in meetup
-
-  var meetupId = getMeetupId(id); // return Null if id doesn't exist in meetup
-
-  if (!meetupId) {
-    return;
-  } // Generate new id for RSVP
-
-
-  var nextId = _rsvp.default.length + 1; // extract useful property
-
-  meetupToRsvp.id = nextId;
-  meetupToRsvp.meetup = meetupId.id;
-  meetupToRsvp.user = body.userId;
-  meetupToRsvp.status = body.status; // push data to RSVPs
-
-  _rsvp.default.push(meetupToRsvp); // eslint-disable-next-line consistent-return
-
-
-  return [meetupToRsvp];
-};
 
 var MeetupController =
 /*#__PURE__*/
@@ -113,9 +41,20 @@ function () {
      * @memberof MeetupController
      */
     value: function getMeetups(req, res) {
-      res.status(200).json({
-        status: 200,
-        data: _getMeetups()
+      _db.default.query('SELECT * FROM meetups', function (error, response) {
+        if (error) {
+          response.status(500).json({
+            status: 500,
+            error: [error.message]
+          });
+        }
+
+        if (response) {
+          res.status(200).json({
+            status: 200,
+            data: response.rows
+          });
+        }
       });
     }
     /**
@@ -134,19 +73,31 @@ function () {
     key: "getMeetupById",
     value: function getMeetupById(req, res) {
       var meetupId = parseInt(req.params.id, 10);
-      var matchedMeetup = getMeetupId(meetupId);
 
-      if (matchedMeetup) {
-        res.status(200).json({
-          status: 200,
-          data: [matchedMeetup]
-        });
-      } else {
-        res.status(404).json({
-          status: 404,
-          error: "meetup with id: ".concat(meetupId, " does not exist in record")
-        });
-      }
+      _db.default.query("SELECT * FROM meetups WHERE id = ".concat(meetupId), function (error, response) {
+        if (error) {
+          return res.status(500).json({
+            status: 500,
+            error: [error.message]
+          });
+        }
+
+        if (response) {
+          if (!response.rows[0]) {
+            return res.status(404).json({
+              status: 404,
+              error: ["meetup with ID: ".concat(meetupId, " does not exist in record")]
+            });
+          }
+
+          if (response) {
+            res.status(200).json({
+              status: 200,
+              data: response.rows
+            });
+          }
+        }
+      });
     }
     /**
      * Handle post for the route api/v1/meetups
@@ -168,7 +119,15 @@ function () {
           location = _req$body.location,
           images = _req$body.images,
           topic = _req$body.topic,
-          happeningOn = _req$body.happeningOn; // Validating input
+          happeningOn = _req$body.happeningOn;
+      var parsedDate = Date.parse(new Date(happeningOn)); // Validating input
+
+      if (parsedDate <= Date.parse((0, _moment.default)()) || !(0, _moment.default)(parsedDate).isValid) {
+        return res.status(400).json({
+          status: 400,
+          error: ['HappeningOn can not be less or equal to todays date']
+        });
+      }
 
       if (!location || !topic || !images || !happeningOn) {
         return res.status(400).json({
@@ -184,14 +143,27 @@ function () {
         });
       }
 
-      return res.status(201).json({
-        status: 201,
-        data: addMeetup({
-          location: location,
-          images: images,
-          topic: topic,
-          happeningOn: happeningOn
-        })
+      _db.default.query('INSERT INTO meetups(location, happening_on, topic, images)  VALUES($1, $2, $3, $4) RETURNING *', [location, happeningOn, topic, images], function (error, response) {
+        if (error) {
+          if (error.message === "invalid input syntax for type date: \"".concat(happeningOn, "\"")) {
+            return res.status(400).json({
+              status: 400,
+              error: ["happeningOn: ".concat(happeningOn, " should follow this date format: \"August 3, 2013\"")]
+            });
+          }
+
+          return res.status(500).json({
+            status: 500,
+            error: [error.message]
+          });
+        }
+
+        if (response) {
+          return res.status(201).json({
+            status: 201,
+            message: [response.rows[0]]
+          });
+        }
       });
     }
     /**
@@ -209,18 +181,20 @@ function () {
   }, {
     key: "getUpcomingMeetups",
     value: function getUpcomingMeetups(req, res) {
-      var upcommingMeetup = getUpcomingMeetup();
+      _db.default.query('SELECT * FROM meetups WHERE happening_on > NOW()', function (error, response) {
+        if (error) {
+          res.status(500).json({
+            status: 500,
+            error: [error.message]
+          });
+        }
 
-      if (!upcommingMeetup) {
-        return res.status(200).json({
-          status: 200,
-          data: ['There are no upcoming meetups']
-        });
-      }
-
-      return res.status(200).json({
-        status: 200,
-        data: upcommingMeetup
+        if (response) {
+          res.status(200).json({
+            status: 200,
+            data: response.rows
+          });
+        }
       });
     }
     /**
@@ -256,24 +230,25 @@ function () {
           error: 'value type not correct'
         });
       } // fetch specified meetup id and add to RSVP
+      // const rsvp =
 
 
-      var rsvp = addMeetupToRsvp(meetupId, {
-        status: status,
-        userId: userId
-      }); // check if meetup with id exists
+      _db.default.query("SELECT * FROM meetups WHERE id = ".concat(meetupId), function (error, response) {
+        if (error) {
+          return res.status(500).json({
+            status: 500,
+            error: [error.message]
+          });
+        }
 
-      if (!rsvp) {
-        return res.status(404).json({
-          status: 404,
-          error: 'meetup with the specified ID not found'
-        });
-      } // All conditions met
-
-
-      return res.status(201).json({
-        status: 201,
-        data: rsvp
+        if (response) {
+          if (!response.rows[0]) {
+            return res.status(404).json({
+              status: 404,
+              error: ["meetup with ID: ".concat(meetupId, " does not exist in record")]
+            });
+          }
+        }
       });
     }
   }]);

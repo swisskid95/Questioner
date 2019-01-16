@@ -29,5 +29,53 @@ var questions = [{
   body: 'Questions body',
   votes: 14
 }];
-var _default = questions;
+var _default = questions; // mport { Pool } from 'pg';
+// import dotenv from 'dotenv';
+// dotenv.config();
+// const pool = new Pool({
+//   connectionstring: process.env.DATABASE_URL,
+// });
+// // Defining Meetup table and column
+// // creates meetup table
+// const createQuestionTable = () => {
+//   const queryText = `CREATE TABLE IF NOT EXITS
+//       Question(
+//         QuestionID SERIAL PRIMARY KEY,
+//         Location TEXT NOT NULL,
+//         CreatedQuestionOn TIMESTAMP,
+//         MeetupID INT FOREIGN KEY
+//       )`;
+//   pool.query(queryText)
+//     .then((res) => {
+//       console.log(res);
+//       pool.end();
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       pool.end();
+//     });
+// };
+// const dropMeetupTable = () => {
+//   const queryText = 'DROP TABLE IF EXIST Meetup';
+//   pool.query(queryText)
+//     .then((res) => {
+//       console.log(res);
+//       pool.end();
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       pool.end();
+//     });
+// };
+// pool.on('remove', () => {
+//   console.log('Client removed');
+//   process.end();
+// });
+// export default {
+//   createMeetupTable,
+//   dropMeetupTable,
+//   pool,
+// };
+// require('make-runnable');
+
 exports.default = _default;

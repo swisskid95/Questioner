@@ -19,7 +19,9 @@ var _question = _interopRequireDefault(require("./routes/question"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import dotenv from 'dotenv';
 // Import Routes
+// dotenv.config();
 var app = (0, _express.default)();
 app.use((0, _morgan.default)('dev')); // Set to env Port value for availability
 
