@@ -191,22 +191,35 @@ class MeetupController {
     // fetch specified meetup id and add to RSVP
     // const rsvp =
 
-    pool.query(`SELECT * FROM meetups WHERE id = ${meetupId}`, (error, response) => {
-      if (error) {
-        return res.status(500).json({
-          status: 500,
-          error: [error.message],
-        });
-      }
-      if (response) {
-        if (!response.rows[0]) {
-          return res.status(404).json({
-            status: 404,
-            error: [`meetup with ID: ${meetupId} does not exist in record`],
+    pool.query('INSERT INTO rsvps(meetup_id, user_id, status) VALUES($1, $2, $3) RETURNING *',
+      [meetupId, userId, status], (error, response) => {
+        if (error) {
+          if (error.message === 'insert or update on table "rsvps" violates foreign key constraint "rsvps_user_id_fkey"') {
+            return res.status(404).json({
+              status: 404,
+              error: 'user with specified id cant be found',
+            });
+          }
+
+          if (error.message === 'insert or update on table "rsvps" violates foreign key constraint "rsvps_meetup_id_fkey"') {
+            return res.status(404).json({
+              status: 404,
+              error: 'Meetup with specified id cant be found',
+            });
+          }
+
+          return res.status(500).json({
+            status: 500,
+            error: error.message,
           });
         }
-      }
-    });
+        if (response) {
+          return res.status(201).json({
+            status: 201,
+            data: response.rows,
+          });
+        }
+      });
   }
 }
 

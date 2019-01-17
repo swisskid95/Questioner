@@ -63,7 +63,7 @@ class createTables {
         id SERIAL PRIMARY KEY,
         meetup_id INT REFERENCES meetups(id) NOT NULL,
         user_id INT REFERENCES users(id) NOT NULL,
-        response TEXT NOT NULL
+        status TEXT NOT NULL
       )`;
 
     pool.query(queryText)

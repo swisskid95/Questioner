@@ -32,9 +32,23 @@ class QuestionController {
       });
     }
 
-    pool.query('INSERT INTO meetups(createdBy, meetupId, title, body)  VALUES($1, $2, $3, $4) RETURNING *',
+    pool.query('INSERT INTO questions(created_by, meetup_id, title, body)  VALUES($1, $2, $3, $4) RETURNING *',
       [createdBy, meetup, title, body], (error, response) => {
         if (error) {
+          if (error.message === 'insert or update on table "questions" violates foreign key constraint "questions_meetup_id_fkey"') {
+            return res.status(400).json({
+              status: 400,
+              error: `meetup with id: ${meetup} does not exist`,
+            });
+          }
+
+          if (error.message === 'insert or update on table "questions" violates foreign key constraint "questions_created_by_fkey"') {
+            return res.status(400).json({
+              status: 404,
+              error: `user id: ${createdBy} does not exist`,
+            });
+          }
+
           return res.status(500).json({
             status: 500,
             error: [error.message],
@@ -47,7 +61,6 @@ class QuestionController {
           });
         }
       });
-    
   }
 
   /**
@@ -63,26 +76,26 @@ class QuestionController {
  */
   static increaseVote(req, res) {
     const questionId = parseInt(req.params.id, 10);
-    pool.query(`SELECT * FROM meetups WHERE id = ${questionId}`, (error, response) => {
+    pool.query(`UPDATE questions SET votes = votes + 1 WHERE id = ${questionId} RETURNING questions.*`, (error, response) => {
       if (error) {
         return res.status(500).json({
           status: 500,
-          error: [error.message],
+          error: error.message,
         });
       }
+
+      if (response.rowCount === 0) {
+        return res.status(404).json({
+          status: 404,
+          error: `Question with id: ${questionId} does not exist`,
+        });
+      }
+
       if (response) {
-        if (!response.rows[0]) {
-          return res.status(404).json({
-            status: 404,
-            error: [`meetup with ID: ${questionId} does not exist in record`],
-          });
-        }
-        if (response) {
-          res.status(200).json({
-            status: 200,
-            data: response.rows[0],
-          });
-        }
+        res.status(200).json({
+          status: 200,
+          data: response,
+        });
       }
     });
   }
@@ -100,7 +113,7 @@ class QuestionController {
    */
   static decreaseVote(req, res) {
     const questionId = parseInt(req.params.id, 10);
-    pool.query(`SELECT * FROM meetups WHERE id = ${questionId}`, (error, response) => {
+    pool.query(`SELECT * FROM questions WHERE id = ${questionId}`, (error, response) => {
       if (error) {
         return res.status(500).json({
           status: 500,
@@ -111,16 +124,34 @@ class QuestionController {
         if (!response.rows[0]) {
           return res.status(404).json({
             status: 404,
-            error: [`meetup with ID: ${questionId} does not exist in record`],
-          });
-        }
-        if (response) {
-          res.status(200).json({
-            status: 200,
-            data: response.rows[0],
+            error: [`Question with ID: ${questionId} does not exist in record`],
           });
         }
       }
+
+      pool.query(`UPDATE questions SET votes = votes - 1 WHERE id = ${questionId} 
+        AND votes > 0 RETURNING questions.*`, (fault, message) => {
+        if (fault) {
+          return res.status(500).json({
+            status: 500,
+            error: [fault.message],
+          });
+        }
+        if (message) {
+          if (!message.rows[0]) {
+            return res.status(400).json({
+              status: 400,
+              error: 'Not allowed to reduce votes below 0',
+            });
+          }
+          if (message) {
+            res.status(200).json({
+              status: 200,
+              data: message.rows,
+            });
+          }
+        }
+      });
     });
   }
 }
