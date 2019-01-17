@@ -89,10 +89,10 @@ class createTables {
         last_name TEXT NOT NULL,
         other_name TEXT,
         username TEXT UNIQUE NOT NULL,
-        email TEXT NOT NULL,
+        password TEXT NOT NULL,
+        email TEXT UNIQUE NOT NULL,
         phone_number TEXT NOT NULL,
         registered DATE DEFAULT NOW(),
-        topic TEXT NOT NULL,
         is_admin BOOLEAN DEFAULT FALSE
       )`;
 

@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import indexRouter from './routes/index';
 import meetupRouter from './routes/meetup';
 import questionRouter from './routes/question';
+import userRouter from './routes/user';
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/v1', indexRouter);
 app.use('/api/v1/meetups', meetupRouter);
 app.use('/api/v1/questions', questionRouter);
+app.use('/api/v1/auth', userRouter);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
