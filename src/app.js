@@ -1,11 +1,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
+import dotenv from 'dotenv';
 
 // Import Routes
 import indexRouter from './routes/index';
 import meetupRouter from './routes/meetup';
 import questionRouter from './routes/question';
+
+dotenv.config();
 
 const app = express();
 

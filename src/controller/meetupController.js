@@ -1,67 +1,5 @@
-import meetups from '../models/meetups';
-import rsvps from '../models/rsvp';
-
-// Helper functions
-// Returns all meetups
-const getMeetups = () => meetups;
-
-// returns a specific meetup with id specified
-const getMeetupId = id => meetups.find(m => m.id === id);
-
-// Filters out the meetups below current date
-const getUpcomingMeetup = () => {
-  const today = Date.parse(new Date());
-
-  const upcomingMeetups = meetups.filter(m => Date.parse(m.happeningOn) > today);
-
-  return upcomingMeetups;
-};
-
-// create new meetup
-const addMeetup = (meetup) => {
-  const meetupToDb = {};
-  const nextId = meetups.length + 1;
-
-  meetupToDb.id = nextId;
-  meetupToDb.createdOn = new Date();
-  meetupToDb.location = meetup.location.trim();
-  meetupToDb.images = [...meetup.images];
-  meetupToDb.topic = meetup.topic.trim();
-  meetupToDb.happeningOn = new Date(meetup.happeningOn.trim());
-
-  // Push data to meetups
-  meetups.push(meetupToDb);
-
-  return [meetupToDb];
-};
-
-// push meetup with id to rsvp
-const addMeetupToRsvp = (id, body) => {
-  const meetupToRsvp = {};
-
-  // Check if id exist in meetup
-  const meetupId = getMeetupId(id);
-
-  // return Null if id doesn't exist in meetup
-  if (!meetupId) {
-    return;
-  }
-
-  // Generate new id for RSVP
-  const nextId = rsvps.length + 1;
-
-  // extract useful property
-  meetupToRsvp.id = nextId;
-  meetupToRsvp.meetup = meetupId.id;
-  meetupToRsvp.user = body.userId;
-  meetupToRsvp.status = body.status;
-
-  // push data to RSVPs
-  rsvps.push(meetupToRsvp);
-
-  // eslint-disable-next-line consistent-return
-  return [meetupToRsvp];
-};
+import moment from 'moment';
+import pool from '../db';
 
 class MeetupController {
   /**
@@ -76,9 +14,19 @@ class MeetupController {
    * @memberof MeetupController
    */
   static getMeetups(req, res) {
-    res.status(200).json({
-      status: 200,
-      data: getMeetups(),
+    pool.query('SELECT * FROM meetups', (error, response) => {
+      if (error) {
+        response.status(500).json({
+          status: 500,
+          error: [error.message],
+        });
+      }
+      if (response) {
+        res.status(200).json({
+          status: 200,
+          data: response.rows,
+        });
+      }
     });
   }
 
@@ -95,19 +43,29 @@ class MeetupController {
    */
   static getMeetupById(req, res) {
     const meetupId = parseInt(req.params.id, 10);
-    const matchedMeetup = getMeetupId(meetupId);
 
-    if (matchedMeetup) {
-      res.status(200).json({
-        status: 200,
-        data: [matchedMeetup],
-      });
-    } else {
-      res.status(404).json({
-        status: 404,
-        error: `meetup with id: ${meetupId} does not exist in record`,
-      });
-    }
+    pool.query(`SELECT * FROM meetups WHERE id = ${meetupId}`, (error, response) => {
+      if (error) {
+        return res.status(500).json({
+          status: 500,
+          error: [error.message],
+        });
+      }
+      if (response) {
+        if (!response.rows[0]) {
+          return res.status(404).json({
+            status: 404,
+            error: [`meetup with ID: ${meetupId} does not exist in record`],
+          });
+        }
+        if (response) {
+          res.status(200).json({
+            status: 200,
+            data: response.rows,
+          });
+        }
+      }
+    });
   }
 
   /**
@@ -127,7 +85,15 @@ class MeetupController {
       location, images, topic, happeningOn,
     } = req.body;
 
+    const parsedDate = Date.parse(new Date(happeningOn));
+
     // Validating input
+    if (parsedDate <= Date.parse(moment()) || !moment(parsedDate).isValid) {
+      return res.status(400).json({
+        status: 400,
+        error: ['HappeningOn can not be less or equal to todays date'],
+      });
+    }
     if (!location || !topic || !images || !happeningOn) {
       return res.status(400)
         .json({
@@ -135,7 +101,7 @@ class MeetupController {
           error: 'required properties not given!',
         });
     } if (typeof location !== 'string' || typeof topic !== 'string'
-    || typeof happeningOn !== 'string' || typeof images !== 'object') {
+      || typeof happeningOn !== 'string' || typeof images !== 'object') {
       return res.status(400)
         .json({
           status: 400,
@@ -143,12 +109,27 @@ class MeetupController {
         });
     }
 
-    return res.status(201).json({
-      status: 201,
-      data: addMeetup({
-        location, images, topic, happeningOn,
-      }),
-    });
+    pool.query('INSERT INTO meetups(location, happening_on, topic, images)  VALUES($1, $2, $3, $4) RETURNING *',
+      [location, happeningOn, topic, images], (error, response) => {
+        if (error) {
+          if (error.message === `invalid input syntax for type date: "${happeningOn}"`) {
+            return res.status(400).json({
+              status: 400,
+              error: [`happeningOn: ${happeningOn} should follow this date format: "August 3, 2013"`],
+            });
+          }
+          return res.status(500).json({
+            status: 500,
+            error: [error.message],
+          });
+        }
+        if (response) {
+          return res.status(201).json({
+            status: 201,
+            message: [response.rows[0]],
+          });
+        }
+      });
   }
 
   /**
@@ -163,18 +144,19 @@ class MeetupController {
    * @memberof MeetupController
    */
   static getUpcomingMeetups(req, res) {
-    const upcommingMeetup = getUpcomingMeetup();
-
-    if (!upcommingMeetup) {
-      return res.status(200).json({
-        status: 200,
-        data: ['There are no upcoming meetups'],
-      });
-    }
-
-    return res.status(200).json({
-      status: 200,
-      data: upcommingMeetup,
+    pool.query('SELECT * FROM meetups WHERE happening_on > NOW()', (error, response) => {
+      if (error) {
+        res.status(500).json({
+          status: 500,
+          error: [error.message],
+        });
+      }
+      if (response) {
+        res.status(200).json({
+          status: 200,
+          data: response.rows,
+        });
+      }
     });
   }
 
@@ -207,20 +189,23 @@ class MeetupController {
     }
 
     // fetch specified meetup id and add to RSVP
-    const rsvp = addMeetupToRsvp(meetupId, { status, userId });
+    // const rsvp =
 
-    // check if meetup with id exists
-    if (!rsvp) {
-      return res.status(404).json({
-        status: 404,
-        error: 'meetup with the specified ID not found',
-      });
-    }
-
-    // All conditions met
-    return res.status(201).json({
-      status: 201,
-      data: rsvp,
+    pool.query(`SELECT * FROM meetups WHERE id = ${meetupId}`, (error, response) => {
+      if (error) {
+        return res.status(500).json({
+          status: 500,
+          error: [error.message],
+        });
+      }
+      if (response) {
+        if (!response.rows[0]) {
+          return res.status(404).json({
+            status: 404,
+            error: [`meetup with ID: ${meetupId} does not exist in record`],
+          });
+        }
+      }
     });
   }
 }
