@@ -11,7 +11,7 @@ class dropTables {
    * @memberof dropTables
    */
   static dropQuestionTable() {
-    const queryText = 'DROP TABLE IF EXISTS Question';
+    const queryText = 'DROP TABLE IF EXISTS questions';
 
     pool.query(queryText)
       .then((res) => {
@@ -23,7 +23,7 @@ class dropTables {
   }
 
   static dropMeetupTable() {
-    const queryText = 'DROP TABLE IF EXISTS Meetup';
+    const queryText = 'DROP TABLE IF EXISTS meetups';
 
     pool.query(queryText)
       .then((res) => {
@@ -35,7 +35,7 @@ class dropTables {
   }
 
   static dropRsvpTable() {
-    const queryText = 'DROP TABLE IF EXISTS Rsvp';
+    const queryText = 'DROP TABLE IF EXISTS rsvps';
 
     pool.query(queryText)
       .then((res) => {
@@ -47,7 +47,7 @@ class dropTables {
   }
 
   static dropUserTable() {
-    const queryText = 'DROP TABLE EXISTS Meetup';
+    const queryText = 'DROP TABLE EXISTS users';
 
     pool.query(queryText)
       .then((res) => {

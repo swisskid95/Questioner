@@ -63,7 +63,7 @@ class createTables {
         id SERIAL PRIMARY KEY,
         meetup_id INT REFERENCES meetups(id) NOT NULL,
         user_id INT REFERENCES users(id) NOT NULL,
-        Response TEXT NOT NULL
+        response TEXT NOT NULL
       )`;
 
     pool.query(queryText)
@@ -71,7 +71,7 @@ class createTables {
         console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.message);
       });
   }
 
@@ -88,8 +88,9 @@ class createTables {
         first_name TEXT NOT NULL,
         last_name TEXT NOT NULL,
         other_name TEXT,
+        username TEXT UNIQUE NOT NULL,
         email TEXT NOT NULL,
-        Phone_number TEXT NOT NULL,
+        phone_number TEXT NOT NULL,
         registered DATE DEFAULT NOW(),
         topic TEXT NOT NULL,
         is_admin BOOLEAN DEFAULT FALSE

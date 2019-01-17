@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 // Import Statement
 import chai from 'chai';
 import request from 'supertest';

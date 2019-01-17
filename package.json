@@ -2,14 +2,15 @@
   "name": "questioner",
   "version": "1.0.0",
   "description": "Crowdsource questions for a Meetups\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[r\u001b[Cr\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[Cr Meetups",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "npm run build && nyc mocha dist/test/**.spec.js --exit",
+    "test": "SET NODE/ENV=test npm run build && nyc mocha src/test/**.spec.js --register @babel/register --exit",
     "start": "node dist/app.js",
     "build": "babel src --out-dir dist",
     "devstart": "nodemon --exec babel-node src/app.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "migration": "babel-node src/migrator.js"
+    "migration": "babel-node src/migrator.js",
+    "heroku-postbuild": "npm install --production"
   },
   "repository": {
     "type": "git",

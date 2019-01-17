@@ -1,14 +1,16 @@
-import dotenv from 'dotenv';
 import { Pool } from 'pg';
+import config from './config';
 
-dotenv.config();
+let connect;
 
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
-});
+if (process.env.NODE_ENV === 'test') {
+  connect = config.test;
+} else if (process.env.NODE_ENV === 'development') {
+  connect = config.development;
+} else if (process.env.NODE_ENV === 'production') {
+  connect = config.production;
+}
+
+const pool = new Pool(connect);
 
 export default pool;

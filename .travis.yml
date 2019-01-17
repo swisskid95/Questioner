@@ -3,11 +3,20 @@ language: node_js
 node_js:
   - "stable"
 
-script: 
-  - npm test
+services:
+  - postgresql
+
+install: npm install
+
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - cp config/database.yml.travis config/database.yml
 
 after_success:
   - npm run coverage
+
+script: 
+  - npm test
 
 notifications:
   webhooks: https://coverals.io/webhook
