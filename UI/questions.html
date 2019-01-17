@@ -12,513 +12,219 @@
 </head>
 
 <body class="wrap">
-  <div class="container">
 
-    <header class="main-nav">
-      <div class="logo">
-        <h2>Questioner</h2>
+  <header class="main-nav">
+    <div class="logo">
+      <h2>Questioner</h2>
+    </div>
+    <div class="dropdown">
+      <a href="profile.html" class="drop-btn"><i class="fa fa-user"></i> Profile</a>
+      <div class="dropdown-content">
+        <a href="meetups.html" class="current"> Meetups</a>
+        <a href="#" class="add-btn">Add Question</a>
+        <a class="logout-btn" href="index.html">
+          <i class="fas fa-power-off"></i>
+          Logout
+        </a>
       </div>
-      <div class="dropdown">
-        <a href="profile.html" class="drop-btn"><i class="fa fa-user"></i> Profile</a>
-        <div class="dropdown-content">
-          <a href="meetups.html" class="current"> Meetups</a>
-          <a href="#" class="add-btn">Add Question</a>
-          <a class="logout-btn" href="index.html">
-            <i class="fas fa-power-off"></i>
-            Logout
+    </div>
+  </header>
+  <main>
+    <div class="wrapper">
+      <div class="meetup-box">
+        <img src="img/meetup-show3.jpg" alt="meetup picture">
+        <div class=" meetup-description">
+          <a href="#">
+            <div class="topic">
+              <h4 class="header-effect">
+                <i class="fab fa-meetup"></i>
+                <span>Meetup Title</span>
+              </h4>
+            </div>
           </a>
+          <div class="location">
+            <i class="fas fa-thumbtack"></i>
+            <span>Meetup's location</span>
+          </div>
+          <div class="happening-on">
+            <i class="fas fa-calendar-day"></i>
+            <span>Happening: 4th-Jan-2019</span>
+          </div>
+
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat explicabo amet repellat quia illo
+            doloribus magni aliquam quis consequuntur veritatis odit tenetur corrupti veniam officiis quos eligendi
+            ratione excepturi libero inventore, aperiam quod in distinctio. Quod autem molestias voluptatibus alias?
+          </p>
         </div>
       </div>
-    </header>
-    <main>
-      <div class="main-wrapper">
-        <div class="question-form">
-          <div class="add-form">
-            <form action="">
-              <input type="text" for="topic" name="topic" placeholder="Topic" required>
-              <textarea name="body" type="text" cols="30" rows="10" placeholder="Enter Question Body here"></textarea>
-              <button class="submit">
-                Submit
-              </button>
-            </form>
+
+      <div class="question-form">
+        <div class="add-form">
+          <form action="">
+            <input type="text" for="topic" name="topic" placeholder="Topic" required>
+            <textarea name="body" type="text" cols="30" rows="10" placeholder="Enter Question Body here"></textarea>
+            <button class="submit">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <div class="column-0">
+          <div class="created-on">
+            <i class="far fa-calendar-plus"></i>
+            <span>24th-Dec-2018</span>
           </div>
         </div>
-        <div class="question-box">
-          <div class="column-0">
-            <a href="meetups.html" class="q-btn meetup-topic">
-              <div class="topic">
-                <h4 class="header-effect">
-                  <i class="fab fa-meetup"></i>
-                  <span>Meetup 1</span>
-                </h4>
-              </div>
+        <div class="column-1">
+          <div class="created-by">
+            <a href="profile.html" class="q-btn">
+              <i class="fa fa-user"></i>
+              <span>User's name</span>
             </a>
-
-            <div class="created-on">
-              <i class="far fa-calendar-plus"></i>
-              <span>24th-Dec-2018</span>
-            </div>
           </div>
-          <div class="column-1">
-            <div class="created-by">
-              <a href="profile.html" class="q-btn">
-                <i class="fa fa-user"></i>
-                <span>User's name</span>
-              </a>
-            </div>
-            <div class="votes">
-              <i class="fas fa-poll-h"></i>
-              <span>Votes:</span>
-              <span>15</span>
-            </div>
-          </div>
-          <a href="#" class="q-btn">
-            <h4 class="header-effect">
-              <i class="far fa-question-circle"></i>
-              <span>Question 1</span>
-            </h4>
-          </a>
-          <div class="content">
-            <p class="msg-body">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto laborum et recusandae libero soluta?
-              Iste est, quisquam omnis blanditiis porro qui corrupti eius animi, cupiditate accusantium vero, tenetur
-              ex
-              autem!
-            </p>
-
-          </div>
-          <div class="feature">
-            <div class="up-vote q-btn">
-              <i class="fas fa-thumbs-up"></i>
-              <span>Up Vote</span>
-            </div>
-            <div class="down-vote q-btn">
-              <i class="fas fa-thumbs-down"></i>
-              <span>Down Vote</span>
-            </div>
-            <div class="add-comment q-btn">
-              <i class="fas fa-comment-dots"></i>
-              <span>Add comment</span>
-            </div>
+          <div class="votes">
+            <i class="fas fa-poll-h"></i>
+            <span>Votes:</span>
+            <span>17</span>
           </div>
         </div>
-        <div class="question-box">
-          <div class="column-0">
-            <a href="meetups.html" class="q-btn meetup-topic">
-              <div class="topic">
-                <h4 class="header-effect">
-                  <i class="fab fa-meetup"></i>
-                  <span>Meetup 1</span>
-                </h4>
-              </div>
-            </a>
-            <div class="created-on">
-              <i class="far fa-calendar-plus"></i>
-              <span>24th-Dec-2018</span>
-            </div>
-          </div>
-          <div class="column-1">
-            <div class="created-by">
-              <a href="profile.html" class="q-btn">
-                <i class="fa fa-user"></i>
-                <span>User's name</span>
-              </a>
-            </div>
-            <div class="votes">
-              <i class="fas fa-poll-h"></i>
-              <span>Votes:</span>
-              <span>13</span>
-            </div>
-          </div>
-          <a href="#" class="q-btn">
-            <h4 class="header-effect">
-              <i class="far fa-question-circle"></i>
-              <span>Question 2</span>
-            </h4>
-          </a>
-          <div class="content">
-            <p class="msg-body">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto laborum et recusandae libero soluta?
-              Iste est, quisquam omnis blanditiis porro qui corrupti eius animi, cupiditate accusantium vero, tenetur
-              ex
-              autem!
-            </p>
-          </div>
-          <div class="feature">
-            <div class="up-vote q-btn">
-              <i class="fas fa-thumbs-up"></i>
-              <span>Up Vote</span>
-            </div>
-            <div class="down-vote q-btn">
-              <i class="fas fa-thumbs-down"></i>
-              <span>Down Vote</span>
-            </div>
-            <div class="add-comment q-btn">
-              <i class="fas fa-comment-dots"></i>
-              <span>Add comment</span>
-            </div>
-          </div>
+        <a href="#" class="q-btn">
+          <h4 class="header-effect">
+            <i class="far fa-question-circle"></i>
+            <span>Question 1</span>
+          </h4>
+        </a>
+        <div class="content">
+          <p class="msg-body">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto laborum et recusandae libero soluta?
+            Iste est, quisquam omnis blanditiis porro qui corrupti eius animi, cupiditate accusantium vero, tenetur
+            ex
+            autem!
+          </p>
 
         </div>
-        <div class="question-box">
-          <div class="column-0">
-            <a href="meetups.html" class="q-btn meetup-topic">
-              <div class="topic">
-                <h4 class="header-effect">
-                  <i class="fab fa-meetup"></i>
-                  <span>Meetup 1</span>
-                </h4>
-              </div>
-            </a>
-            <div class="created-on">
-              <i class="far fa-calendar-plus"></i>
-              <span>24th-Dec-2018</span>
-            </div>
+        <div class="feature">
+          <div class="up-vote q-btn">
+            <i class="fas fa-thumbs-up"></i>
+            <span>Up Vote</span>
           </div>
-          <div class="column-1">
-            <div class="created-by">
-              <a href="profile.html" class="q-btn">
-                <i class="fa fa-user"></i>
-                <span>User's name</span>
-              </a>
-            </div>
-            <div class="votes">
-              <i class="fas fa-poll-h"></i>
-              <span>Votes:</span>
-              <span>10</span>
-            </div>
+          <div class="down-vote q-btn">
+            <i class="fas fa-thumbs-down"></i>
+            <span>Down Vote</span>
           </div>
-          <a href="#" class="q-btn">
-            <h4 class="header-effect">
-              <i class="far fa-question-circle"></i>
-              <span>Question 3</span>
-            </h4>
-          </a>
-          <div class="content">
-            <p class="msg-body">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto laborum et recusandae libero soluta?
-              Iste est, quisquam omnis blanditiis porro qui corrupti eius animi, cupiditate accusantium vero, tenetur
-              ex
-              autem!
-            </p>
-          </div>
-          <div class="feature">
-            <div class="up-vote q-btn">
-              <i class="fas fa-thumbs-up"></i>
-              <span>Up Vote</span>
-            </div>
-            <div class="down-vote q-btn">
-              <i class="fas fa-thumbs-down"></i>
-              <span>Down Vote</span>
-            </div>
-            <div class="add-comment q-btn">
-              <i class="fas fa-comment-dots"></i>
-              <span>Add comment</span>
-            </div>
-          </div>
-
-        </div>
-        <div class="question-box">
-          <div class="column-0">
-            <a href="meetups.html" class="q-btn meetup-topic">
-              <div class="topic">
-                <h4 class="header-effect">
-                  <i class="fab fa-meetup"></i>
-                  <span>Meetup 2</span>
-                </h4>
-              </div>
-            </a>
-
-            <div class="created-on">
-              <i class="far fa-calendar-plus"></i>
-              <span>24th-Dec-2018</span>
-            </div>
-          </div>
-          <div class="column-1">
-            <div class="created-by">
-              <a href="profile.html" class="q-btn">
-                <i class="fa fa-user"></i>
-                <span>User's name</span>
-              </a>
-            </div>
-            <div class="votes">
-              <i class="fas fa-poll-h"></i>
-              <span>Votes:</span>
-              <span>17</span>
-            </div>
-          </div>
-          <a href="#" class="q-btn">
-            <h4 class="header-effect">
-              <i class="far fa-question-circle"></i>
-              <span>Question 1</span>
-            </h4>
-          </a>
-          <div class="content">
-            <p class="msg-body">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto laborum et recusandae libero soluta?
-              Iste est, quisquam omnis blanditiis porro qui corrupti eius animi, cupiditate accusantium vero, tenetur
-              ex
-              autem!
-            </p>
-
-          </div>
-          <div class="feature">
-            <div class="up-vote q-btn">
-              <i class="fas fa-thumbs-up"></i>
-              <span>Up Vote</span>
-            </div>
-            <div class="down-vote q-btn">
-              <i class="fas fa-thumbs-down"></i>
-              <span>Down Vote</span>
-            </div>
-            <div class="add-comment q-btn">
-              <i class="fas fa-comment-dots"></i>
-              <span>Add comment</span>
-            </div>
-          </div>
-        </div>
-        <div class="question-box">
-          <div class="column-0">
-            <a href="meetups.html" class="q-btn meetup-topic">
-              <div class="topic">
-                <h4 class="header-effect">
-                  <i class="fab fa-meetup"></i>
-                  <span>Meetup 2</span>
-                </h4>
-              </div>
-            </a>
-
-            <div class="created-on">
-              <i class="far fa-calendar-plus"></i>
-              <span>24th-Dec-2018</span>
-            </div>
-          </div>
-          <div class="column-1">
-            <div class="created-by">
-              <a href="profile.html" class="q-btn">
-                <i class="fa fa-user"></i>
-                <span>User's name</span>
-              </a>
-            </div>
-            <div class="votes">
-              <i class="fas fa-poll-h"></i>
-              <span>Votes:</span>
-              <span>15</span>
-            </div>
-          </div>
-          <a href="#" class="q-btn">
-            <h4 class="header-effect">
-              <i class="far fa-question-circle"></i>
-              <span>Question 2</span>
-            </h4>
-          </a>
-          <div class="content">
-            <p class="msg-body">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto laborum et recusandae libero soluta?
-              Iste est, quisquam omnis blanditiis porro qui corrupti eius animi, cupiditate accusantium vero, tenetur
-              ex
-              autem!
-            </p>
-
-          </div>
-          <div class="feature">
-            <div class="up-vote q-btn">
-              <i class="fas fa-thumbs-up"></i>
-              <span>Up Vote</span>
-            </div>
-            <div class="down-vote q-btn">
-              <i class="fas fa-thumbs-down"></i>
-              <span>Down Vote</span>
-            </div>
-            <div class="add-comment q-btn">
-              <i class="fas fa-comment-dots"></i>
-              <span>Add comment</span>
-            </div>
-          </div>
-        </div>
-        <div class="question-box">
-          <div class="column-0">
-            <a href="meetups.html" class="q-btn meetup-topic">
-              <div class="topic">
-                <h4 class="header-effect">
-                  <i class="fab fa-meetup"></i>
-                  <span>Meetup 2</span>
-                </h4>
-              </div>
-            </a>
-
-            <div class="created-on">
-              <i class="far fa-calendar-plus"></i>
-              <span>24th-Dec-2018</span>
-            </div>
-          </div>
-          <div class="column-1">
-            <div class="created-by">
-              <a href="profile.html" class="q-btn">
-                <i class="fa fa-user"></i>
-                <span>User's name</span>
-              </a>
-            </div>
-            <div class="votes">
-              <i class="fas fa-poll-h"></i>
-              <span>Votes:</span>
-              <span>14</span>
-            </div>
-          </div>
-          <a href="#" class="q-btn">
-            <h4 class="header-effect">
-              <i class="far fa-question-circle"></i>
-              <span>Question 3</span>
-            </h4>
-          </a>
-          <div class="content">
-            <p class="msg-body">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto laborum et recusandae libero soluta?
-              Iste est, quisquam omnis blanditiis porro qui corrupti eius animi, cupiditate accusantium vero, tenetur
-              ex
-              autem!
-            </p>
-
-          </div>
-          <div class="feature">
-            <div class="up-vote q-btn">
-              <i class="fas fa-thumbs-up"></i>
-              <span>Up Vote</span>
-            </div>
-            <div class="down-vote q-btn">
-              <i class="fas fa-thumbs-down"></i>
-              <span>Down Vote</span>
-            </div>
-            <div class="add-comment q-btn">
-              <i class="fas fa-comment-dots"></i>
-              <span>Add comment</span>
-            </div>
-          </div>
-        </div>
-        <div class="question-box">
-          <div class="column-0">
-            <a href="meetups.html" class="q-btn meetup-topic">
-              <div class="topic">
-                <h4 class="header-effect">
-                  <i class="fab fa-meetup"></i>
-                  <span>Meetup 3</span>
-                </h4>
-              </div>
-            </a>
-
-            <div class="created-on">
-              <i class="far fa-calendar-plus"></i>
-              <span>24th-Dec-2018</span>
-            </div>
-          </div>
-          <div class="column-1">
-            <div class="created-by">
-              <a href="profile.html" class="q-btn">
-                <i class="fa fa-user"></i>
-                <span>User's name</span>
-              </a>
-            </div>
-            <div class="votes">
-              <i class="fas fa-poll-h"></i>
-              <span>Votes:</span>
-              <span>15</span>
-            </div>
-          </div>
-          <a href="#" class="q-btn">
-            <h4 class="header-effect">
-              <i class="far fa-question-circle"></i>
-              <span>Question 1</span>
-            </h4>
-          </a>
-          <div class="content">
-            <p class="msg-body">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto laborum et recusandae libero soluta?
-              Iste est, quisquam omnis blanditiis porro qui corrupti eius animi, cupiditate accusantium vero, tenetur
-              ex
-              autem!
-            </p>
-
-          </div>
-          <div class="feature">
-            <div class="up-vote q-btn">
-              <i class="fas fa-thumbs-up"></i>
-              <span>Up Vote</span>
-            </div>
-            <div class="down-vote q-btn">
-              <i class="fas fa-thumbs-down"></i>
-              <span>Down Vote</span>
-            </div>
-            <div class="add-comment q-btn">
-              <i class="fas fa-comment-dots"></i>
-              <span>Add comment</span>
-            </div>
-          </div>
-        </div>
-        <div class="question-box">
-          <div class="column-0">
-            <a href="meetups.html" class="q-btn meetup-topic">
-              <div class="topic">
-                <h4 class="header-effect">
-                  <i class="fab fa-meetup"></i>
-                  <span>Meetup 3</span>
-                </h4>
-              </div>
-            </a>
-
-            <div class="created-on">
-              <i class="far fa-calendar-plus"></i>
-              <span>24th-Dec-2018</span>
-            </div>
-          </div>
-          <div class="column-1">
-            <div class="created-by">
-              <a href="profile.html" class="q-btn">
-                <i class="fa fa-user"></i>
-                <span>User's name</span>
-              </a>
-            </div>
-            <div class="votes">
-              <i class="fas fa-poll-h"></i>
-              <span>Votes:</span>
-              <span>9</span>
-            </div>
-          </div>
-          <a href="#" class="q-btn">
-            <h4 class="header-effect">
-              <i class="far fa-question-circle"></i>
-              <span>Question 2</span>
-            </h4>
-          </a>
-          <div class="content">
-            <p class="msg-body">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto laborum et recusandae libero soluta?
-              Iste est, quisquam omnis blanditiis porro qui corrupti eius animi, cupiditate accusantium vero, tenetur
-              ex
-              autem!
-            </p>
-
-          </div>
-          <div class="feature">
-            <div class="up-vote q-btn">
-              <i class="fas fa-thumbs-up"></i>
-              <span>Up Vote</span>
-            </div>
-            <div class="down-vote q-btn">
-              <i class="fas fa-thumbs-down"></i>
-              <span>Down Vote</span>
-            </div>
-            <div class="add-comment q-btn">
-              <i class="fas fa-comment-dots"></i>
-              <span>Add comment</span>
-            </div>
+          <div class="add-comment q-btn">
+            <i class="fas fa-comment-dots"></i>
+            <span>Add comment</span>
           </div>
         </div>
       </div>
-    </main>
-    <footer class="footer">
-      &copy; Andela cycle 40 Bootcamp
-    </footer>
-  </div>
+      <div class="question-box">
+        <div class="column-0">
+          <div class="created-on">
+            <i class="far fa-calendar-plus"></i>
+            <span>24th-Dec-2018</span>
+          </div>
+        </div>
+        <div class="column-1">
+          <div class="created-by">
+            <a href="profile.html" class="q-btn">
+              <i class="fa fa-user"></i>
+              <span>User's name</span>
+            </a>
+          </div>
+          <div class="votes">
+            <i class="fas fa-poll-h"></i>
+            <span>Votes:</span>
+            <span>13</span>
+          </div>
+        </div>
+        <a href="#" class="q-btn">
+          <h4 class="header-effect">
+            <i class="far fa-question-circle"></i>
+            <span>Question 2</span>
+          </h4>
+        </a>
+        <div class="content">
+          <p class="msg-body">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto laborum et recusandae libero soluta?
+            Iste est, quisquam omnis blanditiis porro qui corrupti eius animi, cupiditate accusantium vero, tenetur
+            ex
+            autem!
+          </p>
+
+        </div>
+        <div class="feature">
+          <div class="up-vote q-btn">
+            <i class="fas fa-thumbs-up"></i>
+            <span>Up Vote</span>
+          </div>
+          <div class="down-vote q-btn">
+            <i class="fas fa-thumbs-down"></i>
+            <span>Down Vote</span>
+          </div>
+          <div class="add-comment q-btn">
+            <i class="fas fa-comment-dots"></i>
+            <span>Add comment</span>
+          </div>
+        </div>
+      </div>
+      <div class="question-box">
+        <div class="column-0">
+          <div class="created-on">
+            <i class="far fa-calendar-plus"></i>
+            <span>24th-Dec-2018</span>
+          </div>
+        </div>
+        <div class="column-1">
+          <div class="created-by">
+            <a href="profile.html" class="q-btn">
+              <i class="fa fa-user"></i>
+              <span>User's name</span>
+            </a>
+          </div>
+          <div class="votes">
+            <i class="fas fa-poll-h"></i>
+            <span>Votes:</span>
+            <span>10</span>
+          </div>
+        </div>
+        <a href="#" class="q-btn">
+          <h4 class="header-effect">
+            <i class="far fa-question-circle"></i>
+            <span>Question 3</span>
+          </h4>
+        </a>
+        <div class="content">
+          <p class="msg-body">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto laborum et recusandae libero soluta?
+            Iste est, quisquam omnis blanditiis porro qui corrupti eius animi, cupiditate accusantium vero, tenetur
+            ex
+            autem!
+          </p>
+
+        </div>
+        <div class="feature">
+          <div class="up-vote q-btn">
+            <i class="fas fa-thumbs-up"></i>
+            <span>Up Vote</span>
+          </div>
+          <div class="down-vote q-btn">
+            <i class="fas fa-thumbs-down"></i>
+            <span>Down Vote</span>
+          </div>
+          <div class="add-comment q-btn">
+            <i class="fas fa-comment-dots"></i>
+            <span>Add comment</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    &copy; Andela cycle 40 Bootcamp
+  </footer>
   <script src="./js/add-form.js"></script>
 </body>
 
