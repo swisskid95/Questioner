@@ -17,7 +17,7 @@ class QuestionController {
       createdBy, meetup, title, body,
     } = req.body;
 
-    // Validation if all properties are given
+    // Validation that all properties are given
     if (!title || !body || !meetup
       || !createdBy || !title.trim()) {
       return res.status(400).json({
@@ -32,12 +32,22 @@ class QuestionController {
       });
     }
 
-    return res.status(201).json({
-      status: 201,
-      data: addQuestion({
-        createdBy, meetup, title, body,
-      }),
-    });
+    pool.query('INSERT INTO meetups(createdBy, meetupId, title, body)  VALUES($1, $2, $3, $4) RETURNING *',
+      [createdBy, meetup, title, body], (error, response) => {
+        if (error) {
+          return res.status(500).json({
+            status: 500,
+            error: [error.message],
+          });
+        }
+        if (response) {
+          return res.status(201).json({
+            status: 201,
+            message: [response.rows[0]],
+          });
+        }
+      });
+    
   }
 
   /**
@@ -53,19 +63,28 @@ class QuestionController {
  */
   static increaseVote(req, res) {
     const questionId = parseInt(req.params.id, 10);
-    const patchedQuestion = increaseVote(questionId);
-
-    if (patchedQuestion) {
-      res.status(200).json({
-        status: 200,
-        data: patchedQuestion,
-      });
-    } else {
-      res.status(400).json({
-        status: 400,
-        error: 'no question with specified id',
-      });
-    }
+    pool.query(`SELECT * FROM meetups WHERE id = ${questionId}`, (error, response) => {
+      if (error) {
+        return res.status(500).json({
+          status: 500,
+          error: [error.message],
+        });
+      }
+      if (response) {
+        if (!response.rows[0]) {
+          return res.status(404).json({
+            status: 404,
+            error: [`meetup with ID: ${questionId} does not exist in record`],
+          });
+        }
+        if (response) {
+          res.status(200).json({
+            status: 200,
+            data: response.rows[0],
+          });
+        }
+      }
+    });
   }
 
   /**
@@ -81,19 +100,28 @@ class QuestionController {
    */
   static decreaseVote(req, res) {
     const questionId = parseInt(req.params.id, 10);
-    const patchedQuestion = decreaseVote(questionId);
-
-    if (patchedQuestion) {
-      res.status(200).json({
-        status: 200,
-        data: patchedQuestion,
-      });
-    } else {
-      res.status(400).json({
-        status: 400,
-        error: 'no question with specified id',
-      });
-    }
+    pool.query(`SELECT * FROM meetups WHERE id = ${questionId}`, (error, response) => {
+      if (error) {
+        return res.status(500).json({
+          status: 500,
+          error: [error.message],
+        });
+      }
+      if (response) {
+        if (!response.rows[0]) {
+          return res.status(404).json({
+            status: 404,
+            error: [`meetup with ID: ${questionId} does not exist in record`],
+          });
+        }
+        if (response) {
+          res.status(200).json({
+            status: 200,
+            data: response.rows[0],
+          });
+        }
+      }
+    });
   }
 }
 
